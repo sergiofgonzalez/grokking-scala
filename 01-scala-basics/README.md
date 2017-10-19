@@ -35,7 +35,7 @@ Introduces Scala's pattern matching with a very simple example that maps a numbe
 More comprehensive examples related to pattern matching techniques in Scala.
 
 ## [011 &mdash; Hello, Exceptions (snippet)](./011-snippet-hello-exceptions)
-More comprehensive examples related to pattern matching techniques in Scala.
+Introduce exception handling in Scala.
 
 ## [e01 &mdash; Hello, ranges (snippet)](./e01-snippet-hello-ranges)
 Illustrates the concept of ranges as in `10 to 100` and some of its methods.
