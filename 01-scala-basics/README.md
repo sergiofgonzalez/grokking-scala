@@ -35,7 +35,16 @@ Introduces Scala's pattern matching with a very simple example that maps a numbe
 More comprehensive examples related to pattern matching techniques in Scala.
 
 ## [011 &mdash; Hello, Exceptions (snippet)](./011-snippet-hello-exceptions)
-Introduce exception handling in Scala.
+Introduces exception handling in Scala.
+
+## [012 &mdash; Hello, Maps (snippet)](./013-snippet-hello-maps)
+Introduces Maps (and tuples!) in Scala.
+
+## [013 &mdash; Hello, Nested Functions (snippet)](./012-snippet-hello-nested-functions)
+Introduces nested functions in Scala.
 
 ## [e01 &mdash; Hello, ranges (snippet)](./e01-snippet-hello-ranges)
+Illustrates the concept of ranges as in `10 to 100` and some of its methods.
+
+## [e02 &mdash; Hello, sbt](./e02-hello-sbt)
 Illustrates the concept of ranges as in `10 to 100` and some of its methods.

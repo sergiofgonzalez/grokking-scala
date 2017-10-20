@@ -20,3 +20,19 @@ def ordinal(n: Int) = {
 val num = scala.util.Random.nextInt(20) + 1
 ordinal(num)
 
+
+/*
+  Same simple principle applies to other basic types like Strings
+*/
+def printCommand(command: String) = command match {
+  case "get" => println("GET")
+  case "post" => println("POST")
+  case "put" => println("PUT")
+  case "delete" => println("DELETE")
+  case "options" => println("OPTIONS") 
+  case rest => throw new IllegalArgumentException(s"$rest is not a known or supported command") 
+}
+
+printCommand("post")
+printCommand("head")
+

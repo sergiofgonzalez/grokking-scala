@@ -53,3 +53,14 @@ println(s"odd : ${ oneToTen.filterNot(_ % 2 == 0 )}")
   you use in arrays
 */
 oneToTen(5)
+
+/* Scala Lists and Java lists are not compatible, but can be converted */
+val scalaList = List(1, 2, 3)
+val aJavaList = java.util.Arrays.asList(scalaList.toArray) // <- this creates a Java with a single element, that being the list
+aJavaList.size
+aJavaList.get(0)
+
+// you can use the special :_* to flatMap the list
+val bJavaList = java.util.Arrays.asList(scalaList.toArray:_*)
+bJavaList.size
+bJavaList.get(0)

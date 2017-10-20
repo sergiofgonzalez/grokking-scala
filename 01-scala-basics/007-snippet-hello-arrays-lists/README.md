@@ -20,6 +20,12 @@ The example illustrates several concepts associated with arrays and lists:
 + Using `filter` and `filterNot` to remove elements from a list
 + Accessing individual elements of the List by its index using `list(i)`
 
+The example also illustrates how to convert a Scala list into a Java list:
+```scala
+val scalaList = List(1, 2, 3)
+val bJavaList = java.util.Arrays.asList(scalaList.toArray:_*) // <- java.util.List[Int] = [1, 2, 3]
+```
+
 ## Running the Snippet
 The snippet is intended to be run from `sbt consoleQuick`. Once inside the console type:
 ```

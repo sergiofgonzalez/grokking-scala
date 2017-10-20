@@ -1,1 +1,4 @@
-target
+# .gitignore for Scala snippets and programs
+
+# match only directories (thus the trailing /) and subdirectories (thus no leading /)
+target/
