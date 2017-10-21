@@ -20,6 +20,14 @@ val map = Map(("key1", "value1"), ("key2", "value2"))
 
 and individual values can be accessed like `map("key")`.
 
+But there's even a more expressive way to work with *Maps* in Scala:
+```scala
+var capital = Map("US" -> "Washington", "France" -> "Paris")
+capital += ("Japan" -> "Tokyo")
+
+capital("France")
+```
+
 
 ## Running the Snippet
 The snippet is intended to be run from `sbt consoleQuick`. Once inside the console type:

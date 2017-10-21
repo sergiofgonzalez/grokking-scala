@@ -8,6 +8,10 @@ for (num <- numStrList) {
   }
 }
 
+/* this is similar to good olde for */
+for (i <- 0 to numStrList.length)
+  println(numStrList(i))
+
 /* 
   alternative syntax :
     + The for includes the generator num <-numStrList
