@@ -40,19 +40,21 @@ Introduces exception handling in Scala.
 ## [012 &mdash; Hello, Maps (snippet)](./013-snippet-hello-maps)
 Introduces Maps (and tuples!) in Scala.
 
-## [013 &mdash; Hello, Nested Functions (snippet)](./013-snippet-hello-nested-functions)
+## [013 &mdash; Hello, more Maps and Sets (snippet)](./013-snippet-sets-maps)
+
+## [014 &mdash; Hello, Nested Functions (snippet)](./014-snippet-hello-nested-functions)
 Introduces nested functions in Scala.
 
-## [014 &mdash; Custom Types look like Built-in Types (snippet)](./014-snippet-hello-custom-types)
+## [015 &mdash; Custom Types look like Built-in Types (snippet)](./015-snippet-hello-custom-types)
 Illustrates how custom types look like built-in types in Scala.
 
-## [015 &mdash; Hello, classes (snippet)](./015-snippet-hello-classes)
+## [016 &mdash; Hello, classes (snippet)](./016-snippet-hello-classes)
 Illustrates how custom types look like built-in types in Scala.
 
-## [016 &mdash; Hello, args (snippet)](./016-snippet-hello-args)
+## [017 &mdash; Hello, args (snippet)](./017-snippet-hello-args)
 Introduces `args`, the variable that holds the arguments received by a program.
 
-## [017 &mdash; Hello, tuples (snippet)](./017-snippet-hello-tuples)
+## [018 &mdash; Hello, tuples (snippet)](./018-snippet-hello-tuples)
 Introduces the concept of Scala tuples.
 
 ## [e01 &mdash; Hello, ranges (snippet)](./e01-snippet-hello-ranges)
