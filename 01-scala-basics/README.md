@@ -62,3 +62,6 @@ Illustrates the concept of ranges as in `10 to 100` and some of its methods.
 
 ## [e02 &mdash; Hello, sbt](./e02-hello-sbt)
 Illustrates the concept of ranges as in `10 to 100` and some of its methods.
+
+## [e03 &mdash; Reading lines from files](./e03-read-lines-from-files)
+Illustrates the concept of ranges as in `10 to 100` and some of its methods.

@@ -6,8 +6,9 @@ Scala differentiate between mutable and immutable collections. Scala arrays are 
 
 Scala does that using *traits*, which are like Java interfaces, but instead of implementing those, in Scala you *mix in traits*.
 
-Effectively, this means that you can have mutable or immutable hash sets.
+Effectively, this means that you can have mutable or immutable sets and maps.
 
+### Sets
 To create an immutable set you use:
 ```scala
 var jetSet = Set("Boeing", "Airbus")
@@ -29,6 +30,29 @@ import scala.collection.immutable.HashSet
 
 val ahashSet = HashSet("Tomatoes", "Chillies") // Set(Tomatoes, Chillies)
 val b = ahashSet + "Parsley" // Set(Parsley, Tomatoes, Chillies)
+```
+
+### Maps
+
+You can have implementations of Map (both mutable and immutable) and initialize them using factory methods similar to the ones available for arrays, lists and sets.
+
+For an immutable map you'd use:
+```scala
+import scala.collection.mutable
+
+val treasureMap = mutable.Map[Int, String]()
+treasureMap += (1 -> "Go to island")
+treasureMap += (2 -> "Find big X on the ground")
+treasureMap += (3 -> "Dig until find treasure chest")
+
+treasureMap(2)
+```
+
+The default implementation is the immutable one, for which you don't need any import:
+
+```scala
+val romanNumerals = Map(1 -> "I", 2 -> "II", 3-> "III", 4 -> "IV", 5 -> "V")
+romanNumerals(4)
 ```
 
 ## Running the Snippet
