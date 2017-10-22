@@ -2,3 +2,8 @@
 
 # match only directories (thus the trailing /) and subdirectories (thus no leading /)
 target/
+
+# IntelliJ files
+*.iml
+.idea
+
