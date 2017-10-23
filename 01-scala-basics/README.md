@@ -1,5 +1,5 @@
 # 01 &mdash; Scala: the basics
-> simple scala snippets exploring the basics of Scala programming language
+> simple scala snippets and applications that explore the basics of the Scala programming language
 
 ## [001 &mdash; Hello, Scala (snippet)](./001-snippet-hello-scala)
 Illustrates the simplest Scala snippet that can be executed in *Scala REPL* displaying "Hello, world" in the console.
