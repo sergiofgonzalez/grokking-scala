@@ -57,6 +57,9 @@ Introduces `args`, the variable that holds the arguments received by a program.
 ## [018 &mdash; Hello, tuples (snippet)](./018-snippet-hello-tuples)
 Introduces the concept of Scala tuples.
 
+## [019 &mdash; Hello, Symbol literals (snippet)](./019-snippet-hello-symbol)
+Introduces the concept of Scala tuples.
+
 ## [e01 &mdash; Hello, ranges (snippet)](./e01-snippet-hello-ranges)
 Illustrates the concept of ranges as in `10 to 100` and some of its methods.
 

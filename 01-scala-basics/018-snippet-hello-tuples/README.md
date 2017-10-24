@@ -1,4 +1,4 @@
-# 017 &mdash; Hello, tuples (snippet)
+# 018 &mdash; Hello, tuples (snippet)
 > illustrates basic concepts of Scala tuples
 
 ## Description
@@ -7,4 +7,7 @@ Tuples can be used to return several objects from a method without having to def
 Also, instantiation and access is really convenient
 
 ## Running the Snippet
-I haven't been able to run the snippet, as i don't know how to pass parameters to a snippet using `:load <snippet>`.
+The snippet is intended to be run from `sbt consoleQuick`. Once inside the console type:
+```
+scala> :load hello-tuples.scala
+```

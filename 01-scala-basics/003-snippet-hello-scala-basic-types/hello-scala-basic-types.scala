@@ -44,6 +44,14 @@ val greetingMultiline3 = """Hello
   | Jason
   | Isaacs""".stripMargin
 
+
+// more multiline and stripMargin
+val greetingMultiline4 =
+  """Welcome to Ultamix 3000.
+     Type "HELP" for usage notes."""
+
+println(greetingMultiline4.stripMargin)  // this does not work as expected, but it guess it's a console related issue
+
 // string interpolation
 val name = "Jason Isaacs"
 val greeting = s"Hello to $name!!!"
