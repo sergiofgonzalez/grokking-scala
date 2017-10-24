@@ -1,5 +1,5 @@
 # 002 &mdash; Hello, Scala application
-> classes, fields and methods in Scala
+> creating a Scala runnable application from scratch
 
 ## Description
 A Scala application is a standalone singleton object with a method named `main` that takes one parameter of type `Array[String]` and has a result type `Unit`.
@@ -23,10 +23,10 @@ It must be noted that in Scala you're not required to name the file after the cl
 Type `sbt` and then type:
 
 ```bash
-sbt:Hello> run one two three
+sbt:Summer> run one two three
 ```
 
 You can return to the command line just by typing: 
 ```bash
-sbt:Hello> exit
+sbt:Summer> exit
 ```
