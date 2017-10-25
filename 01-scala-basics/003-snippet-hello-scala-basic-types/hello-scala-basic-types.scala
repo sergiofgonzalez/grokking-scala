@@ -56,8 +56,16 @@ println(greetingMultiline4.stripMargin)  // this does not work as expected, but 
 val name = "Jason Isaacs"
 val greeting = s"Hello to $name!!!"
 val greeting2 = s"Hello to ${ name }!!!"
+val result = s"The result of the operation is ${ 6 * 7 }"
 
 // inline formatting + string interpolation
 val firstName = "Idris"
 var height = 1.90
 val formattedGreeting = f"Hi, I'm ${ firstName }%s and I'm $height%2.2f metres tall"
+val formattedGreeting2 = f"Hi, I'm ${ firstName } and I'm $height%2.2f metres tall" // %s is the default
+val approxPi = f"pi is approximately ${Math.PI}%.8f"
+
+
+// raw string interpolator
+val rawStr = raw"No\\\\escape!"
+val sStr = s"No\\\\escape!"

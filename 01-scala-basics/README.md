@@ -60,6 +60,12 @@ Introduces the concept of Scala tuples.
 ## [019 &mdash; Hello, Symbol literals (snippet)](./019-snippet-hello-symbol)
 Introduces the concept of Scala tuples.
 
+## [020 &mdash; Operators as Methods (snippet)](./020-operators-as-methods)
+Illustrates how operators in Scala are just regular methods that are invoked with using a *operator notation* syntax.
+
+## [021 &mdash; Equality in Scala (snippet)](./021-equality)
+Illustrates how operators in Scala are just regular methods that are invoked with using a *operator notation* syntax.
+
 ## [e01 &mdash; Hello, ranges (snippet)](./e01-snippet-hello-ranges)
 Illustrates the concept of ranges as in `10 to 100` and some of its methods.
 
