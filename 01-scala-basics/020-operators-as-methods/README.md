@@ -92,7 +92,7 @@ It is also important to note that:
 + Operators of the same precedence ending in `:` are grouped from right to left => a ::: b ::: c == a ::: (b ::: c)
 + Operators of the same precedence ending in other than `:` are grouped from left to right => a / b / c == (a / b) / c
 
-And as a general guideline when writing code that depends on this obscure precedence rules: **use parentheses** to make it clear how the operation will be computed (e.g. `2 << 2 + 2` is more obscure than `2 << (2 + 2)`)
+And as a general guideline when writing code that depends on this obscure precedence rules for added clarity: **use parentheses** to make it clear how the operation will be computed (e.g. `2 << 2 + 2` is more obscure than `2 << (2 + 2)`)
 
 ## Running the Snippet
 The snippet is intended to be run from `sbt consoleQuick`. Once inside the console type:
