@@ -40,6 +40,13 @@ class Rational(n: Int, d: Int) {
 }
 ```
 
+As in Java, the keyword `this` refers to the object instance on which the currently executing method was invoked, or the object instance being constructed (when used in a constructor).
+
+```scala
+def lessThan(that: Rational): Boolean = numer * that.denom < that.numer * denom 
+def max(that: Rational): Rational = if (lessThan(that)) that else this
+```
+
 ## Running the Snippet
 The snippet is intended to be run from `sbt consoleQuick`. Once inside the console type:
 ```
