@@ -1,4 +1,4 @@
-# 009 &mdash; Methods as operators in a class (snippet) (snippet)
+# 009 &mdash; Methods as operators in a class (snippet)
 > renaming methods as operators
 
 ## Description

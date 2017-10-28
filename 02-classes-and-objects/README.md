@@ -28,5 +28,11 @@ Illustrates how to add private fields and methods to an Scala class.
 ## [009 &mdash; Methods as operators in a class (snippet)](./009-snippet-methods-as-operators)
 Illustrates the rules and syntax for adding auxiliary constructors to a class.
 
+## [010 &mdash; Hello, Method Overloading (snippet)](./010-snippet-method-overloading)
+Illustrates how to do method overloading in an Scala class.
+
+## [011 &mdash; Hello, Implicit Conversions (snippet)](./011-snippet-implicit-conversions)
+Illustrates the rules and syntax for adding auxiliary constructors to a class.
+
 ## [e01 &mdash; More on the App trait](./e01-more-on-app-trait)
 Similar to [003 &mdash; Hello, App trait](./003-hello-app-trait) but concatenating the `args` array with a list of default values to calculate.
