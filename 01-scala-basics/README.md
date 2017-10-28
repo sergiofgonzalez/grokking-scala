@@ -69,6 +69,9 @@ Illustrates how operators in Scala are just regular methods that are invoked wit
 ## [022 &mdash; Hello, Rich Operations (snippet)](./022-hello-rich-operations)
 Illustrates how operators in Scala are just regular methods that are invoked with using a *operator notation* syntax.
 
+## [023 &mdash; Hello, Unit (snippet)](./023-snippet-hello-unit)
+Illustrates how operators in Scala are just regular methods that are invoked with using a *operator notation* syntax.
+
 ## [e01 &mdash; Hello, ranges (snippet)](./e01-snippet-hello-ranges)
 Illustrates the concept of ranges as in `10 to 100` and some of its methods.
 
