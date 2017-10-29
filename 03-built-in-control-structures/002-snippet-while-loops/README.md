@@ -28,5 +28,5 @@ In Scala (or when trying to achieve functional-style programming in any other la
 ## Running the Snippet
 The snippet is intended to be run from `sbt consoleQuick`. Once inside the console type:
 ```
-scala> :load rational.scala
+scala> :load while-loop.scala
 ```

@@ -14,5 +14,5 @@ This supports the functional style of programming:
 ## Running the Snippet
 The snippet is intended to be run from `sbt consoleQuick`. Once inside the console type:
 ```
-scala> :load rational.scala
+scala> :load if-expression.scala
 ```
