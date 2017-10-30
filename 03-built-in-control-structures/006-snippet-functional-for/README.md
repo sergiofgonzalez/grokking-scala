@@ -1,5 +1,5 @@
 # 006 &mdash; Functional for (snippet)
-> yielding values from for
+> yielding values from `for` instead of performing actions
 
 ## Description
 A *functional for* is a for that instead of perfoming actions returns a collection.

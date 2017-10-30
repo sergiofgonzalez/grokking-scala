@@ -16,5 +16,8 @@ Illustrates different techniques to filter out when using `for`.
 ## [005 &mdash; Nested Iterations (snippet)](./005-snippet-nested-iterations)
 Illustrates how to perform nested iterations with `for`.
 
-## [006 &mdash; Functional for (snippet)](./005-snippet-functional-for)
-Illustrates with a simple example how `if` in Scala returns a value.
+## [006 &mdash; Functional for (snippet)](./006-snippet-functional-for)
+Illustrates how to use the *functional for* form in Scala that returns a collection rather than perform actions.
+
+## [007 &mdash; Exceptions in Scala (snippet)](./007-snippet-exceptions)
+Illustrates how to use the *functional for* form in Scala that returns a collection rather than perform actions.
