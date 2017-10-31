@@ -26,4 +26,4 @@ Illustrates the basics of exceptions and exception handling in Scala.
 Illustrates the basics of match expressions in Scala.
 
 ## [e01 &mdash; Printing Multiplication Table: imperative to functional (snippet)](./e01-snippet-multiplication-table-imperative-to-functional)
-Illustrates the basics of match expressions in Scala.
+Illustrates by example how to migrate from imperative to functional style an algorithm that prints out the multiplication tables from 1 to 10.
