@@ -20,4 +20,10 @@ Illustrates how to perform nested iterations with `for`.
 Illustrates how to use the *functional for* form in Scala that returns a collection rather than perform actions.
 
 ## [007 &mdash; Exceptions in Scala (snippet)](./007-snippet-exceptions)
-Illustrates how to use the *functional for* form in Scala that returns a collection rather than perform actions.
+Illustrates the basics of exceptions and exception handling in Scala.
+
+## [008 &mdash; Match expressions (snippet)](./008-snippet-match-expressions)
+Illustrates the basics of match expressions in Scala.
+
+## [e01 &mdash; Printing Multiplication Table: imperative to functional (snippet)](./e01-snippet-multiplication-table-imperative-to-functional)
+Illustrates the basics of match expressions in Scala.
