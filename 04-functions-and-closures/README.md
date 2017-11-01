@@ -14,7 +14,10 @@ Illustrates the concept of function literals (aka lambdas).
 Illustrates the peculiarities of the placeholder syntax with function literals.
 
 ## [005 &mdash; Partially applied functions (snippet)](./005-snippet-partially-applied-functions)
-Illustrates the peculiarities of the placeholder syntax with function literals.
+Introduces the concept of partially applied functions.
+
+## [006 &mdash; Closures (snippet)](./006-snippet-closures)
+Introduces the concept of closures for Scala.
 
 ## [e01 &mdash; Using Class Methods from an Application](./e01-class-method-application)
 Demonstrates how to consume the class defined in [001 &mdash; Class Methods (snippet)](./001-snippet-class-method) as an application.
