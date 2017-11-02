@@ -19,8 +19,11 @@ Introduces the concept of partially applied functions.
 ## [006 &mdash; Closures (snippet)](./006-snippet-closures)
 Introduces the concept of closures for Scala.
 
-## [007 &mdash; Sprcial Function Call Forms (snippet)](./007-snippet-special-function-call-forms)
+## [007 &mdash; Special Function Call Forms (snippet)](./007-snippet-special-function-call-forms)
 Illustrates the syntax for variable length args, named parameters and default arg values.
+
+## [008 &mdash; Tail Recursion (snippet)](./008-snippet-tail-recursion)
+Illustrates the concept of tail-recursive calls and some optimizations that Scala implements for those.
 
 ## [e01 &mdash; Using Class Methods from an Application](./e01-class-method-application)
 Demonstrates how to consume the class defined in [001 &mdash; Class Methods (snippet)](./001-snippet-class-method) as an application.

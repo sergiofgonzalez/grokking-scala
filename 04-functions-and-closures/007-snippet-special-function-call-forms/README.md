@@ -1,4 +1,4 @@
-# 007 &mdash; Sprcial Function Call Forms (snippet)
+# 007 &mdash; Special Function Call Forms (snippet)
 > variable length args, named parameters and default arg values
 
 ## Description
