@@ -55,3 +55,14 @@ withPrintWriter(file) { writer =>
   writer.println(new java.util.Date)
 }
 println("==")
+
+
+/*
+  Let's rewrite twice too
+*/
+def twice(x: Double)(op: Double => Double) = op(op(x))
+
+twice(5) {
+  _ * 2 // same as x: Double => x * 2
+}
+println("==")
