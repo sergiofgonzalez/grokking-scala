@@ -1,5 +1,5 @@
 # 003 &mdash; Writing New Control Structures (snippet)
-> n/a
+> Using currying and curly braces to implement control structures that feel native
 
 ## Description
 In languages with first-class functions, you can make new control structures (that feel like custom additions to the language).
