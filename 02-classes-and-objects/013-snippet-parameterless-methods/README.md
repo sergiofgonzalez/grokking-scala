@@ -1,5 +1,5 @@
-# 002 &mdash; Parameterless Methods (snippet)
-> 
+# 013 &mdash; Parameterless Methods (snippet)
+> parameterless and empty-paren methods
 
 ## Description
 As a running example, we intend to build a library for building and rendering 2D layout elements, in which each element represent a rectangle filled with text.

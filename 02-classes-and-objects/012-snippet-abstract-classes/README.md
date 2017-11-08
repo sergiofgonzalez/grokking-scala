@@ -1,4 +1,4 @@
-# 001 &mdash; Abstract Classes (snippet)
+# 012 &mdash; Abstract Classes (snippet)
 > the syntax for defining abstract classes in Scala
 
 ## Description

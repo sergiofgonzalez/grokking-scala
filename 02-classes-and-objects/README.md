@@ -34,5 +34,20 @@ Illustrates how to do method overloading in an Scala class.
 ## [011 &mdash; Hello, Implicit Conversions (snippet)](./011-snippet-implicit-conversions)
 Illustrates the rules and syntax for adding auxiliary constructors to a class.
 
+## [012 &mdash; Abstract Classes (snippet)](./012-snippet-abstract-classes)
+Illustrates the particularities of *abstract classes* in Scala.
+
+## [013 &mdash; Parameterless Methods (snippet)](./013-snippet-parameterless-methods)
+Illustrates how to define parameterless methods and the difference between parameterless and empty-paren methods and how to use each one of them.
+
+## [014 &mdash; Extending classes (snippet)](./014-snippet-extending-classes)
+Illustrates how to create subclasses using the `extends` keyword and the consequences of extending a class.
+
+## [015 &mdash; Overriding Methods and Fields (snippet)](./015-snippet-overriding-methods-and-fields)
+Illustrates how to override methods with fields, and methods with methods.
+
+## [016 &mdash; Parametric Fields (snippet)](./016-snippet-parametric-fields)
+Introduces the concepts of parametric fields as a way to define class fields in the class definition to reduce code redundancy. 
+
 ## [e01 &mdash; More on the App trait](./e01-more-on-app-trait)
 Similar to [003 &mdash; Hello, App trait](./003-hello-app-trait) but concatenating the `args` array with a list of default values to calculate.
