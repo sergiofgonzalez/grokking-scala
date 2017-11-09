@@ -29,6 +29,12 @@ array.foreach(println) // If a function literal consist of one statemet that tak
 array.foreach(println(_))
 
 
+/* Array operations */
+val nums = Array(1, 2, 3)
+val moreNums = Array(4, 5, 6)
+nums ++ moreNums // Array(1, 2, 3, 4, 5, 6)
+
+
 /* Lists are immutable */
 val list = List("Hello", "to", "Jason", "Isaacs")
 list

@@ -49,5 +49,23 @@ Illustrates how to override methods with fields, and methods with methods.
 ## [016 &mdash; Parametric Fields (snippet)](./016-snippet-parametric-fields)
 Introduces the concepts of parametric fields as a way to define class fields in the class definition to reduce code redundancy. 
 
+## [017 &mdash; Invoking Superclass Constructors (snippet)](./017-snippet-invoking-superclass-constructors)
+Introduces the syntax for calling the superclass constructor from a subclass. 
+
+## [018 &mdash; Polymorphism and Dynamic Binding (snippet)](./018-snippet-polymorphism-and-dynamic-binding)
+Illustrating polymorphism and dynamic binding.
+
+## [019 &mdash; Final Members and Classes (snippet)](./019-snippet-final-members-and-classes)
+Illustrates the use of `final` to prevent methods from being overridden and classes from being extended.
+
+## [020 &mdash; Composition and Inheritance (snippet)](./020-snippet-composition-and-inheritance)
+Basic example illustrating how to change an inheritance relationship for a composition.
+
+## [021 &mdash; Factory Objects (snippet)](./021-snippet-factory-objects)
+Illustrates how to define factory methods in a companion object to centralize object instantiation. As a consequence, the classes that implements a hierarchy can be completely hidden from the clients.
+
 ## [e01 &mdash; More on the App trait](./e01-more-on-app-trait)
 Similar to [003 &mdash; Hello, App trait](./003-hello-app-trait) but concatenating the `args` array with a list of default values to calculate.
+
+## [e02 &mdash; Element 2D lib](./e02-snippet-element)
+The implementation of the Element 2D library &mdash; the running example used from examples 12 to 21.

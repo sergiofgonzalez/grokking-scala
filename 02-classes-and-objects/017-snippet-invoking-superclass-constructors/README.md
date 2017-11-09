@@ -1,5 +1,5 @@
-# 012 &mdash; Abstract Classes (snippet)
-> the syntax for defining abstract classes in Scala
+# 017 &mdash; Invoking Superclass Constructors (snippet)
+> syntax for invoking the superclass constructor
 
 ## Description
 As a running example, we intend to build a library for building and rendering 2D layout elements, in which each element represent a rectangle filled with text.
@@ -24,15 +24,20 @@ hello ***
 
 The elements will be modeled with a type named `Element`.
 
-In the example, we perform our first task, which is the definition of the `Element` type as an abstract class.
-
+In the example, we define a subtype of `ArrayElement` that represents an element consisting of a single line given by a String.
+As the `ArrayElement` primary constructor requires an array of strings as an argument, the new subtype must be defined as:
 ```scala
-abstract class Element {
-  def contents: Array[String]
+class LineElement(s: String) extends ArrayElement(Array(s)) {
+  override def width = s.length
+  override def height = 1
 }
+
+val elem = new LineElement("Hello to Jason Issacs!")
 ```
 
-Note that `contents` is defined as a method of the `Element` class, with no implementation. Note also that the method does not need any abstract modifier.
-
 ## Running the Snippet
-The snippet is intended as documentation and cannot be run.
+The snippet is intended to be run from `sbt consoleQuick`. Once inside the console type:
+
+```
+scala> :load invoking-superclass-constructors.scala
+```

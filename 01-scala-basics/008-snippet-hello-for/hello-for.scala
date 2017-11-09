@@ -9,8 +9,13 @@ for (num <- numStrList) {
 }
 
 /* this is similar to good olde for */
-for (i <- 0 to numStrList.length)
+for (i <- 0 to numStrList.length - 1)
   println(numStrList(i))
+
+/* you can also use until to exclude the upper limit */
+for (i <- 0 until numStrList.length)
+  println(numStrList(i))
+
 
 /* 
   alternative syntax :

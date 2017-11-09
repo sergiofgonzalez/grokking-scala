@@ -20,6 +20,7 @@ val nums = Arrays("one", "two", "three")
 
 The example illustrates several concepts associated with arrays and lists:
 + Iterating over arrays and lists using `foreach`
++ Using `++` to concatenate arrays
 + Using `::` to put elements in front of an existing list (cons)
 + Using `:+` to append elements to a list (note that this operation is heavy, and therefore this method is rarely used &mdash; it's better to prepend with `::` and then call reverse)
 + Using `:::` to concatenate lists

@@ -80,3 +80,6 @@ Illustrates the concept of ranges as in `10 to 100` and some of its methods.
 
 ## [e03 &mdash; Reading lines from files](./e03-read-lines-from-files)
 Illustrates the concept of ranges as in `10 to 100` and some of its methods.
+
+## [e04 &mdash; Hello Zip (snippet)](./e04-snippet-hello-zip)
+Introducing the zip operation that allows you to iterate over two arrays element by element.

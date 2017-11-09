@@ -9,7 +9,7 @@ The library will provide factory methods:
 + `above` &mdash; places the given first argument on top of the second argument
 + `beside` &mdash; places the given first argument on the left of the second argument
 
-As as example, the library must be able to support:
+As an example, the library must be able to support:
 ```scala
 val col1 = elem("hello") above elem("###")
 val col2 = elem("***") above elem("world")
