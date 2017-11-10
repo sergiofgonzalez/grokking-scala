@@ -67,5 +67,8 @@ Illustrates how to define factory methods in a companion object to centralize ob
 ## [e01 &mdash; More on the App trait](./e01-more-on-app-trait)
 Similar to [003 &mdash; Hello, App trait](./003-hello-app-trait) but concatenating the `args` array with a list of default values to calculate.
 
-## [e02 &mdash; Element 2D lib](./e02-snippet-element)
-The implementation of the Element 2D library &mdash; the running example used from examples 12 to 21.
+## [e02 &mdash; Element 2D lib (snippet)](./e02-snippet-element-2d-lib)
+The implementation of the Element 2D library &mdash; the running example used from examples [012]((./012-snippet-abstract-classes)) to [021](./021-snippet-factory-objects).
+
+## [e03 &mdash; Element 2D lib](./e03-element-2d-lib)
+The implementation of the Element 2D library, [012]((./012-snippet-abstract-classes)) to [021](./021-snippet-factory-objects) but structured as an application rather than as a snippet.
