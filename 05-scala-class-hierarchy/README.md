@@ -6,3 +6,7 @@ Introduces the basics of the Scala's class hierarchy: `Any` and its subclasses `
 
 ## [002 &mdash; Hello, Bottom Types (snippet)](./002-snippet-hello-bottom-types)
 Introduces `Null` (the type of the *null reference* for `AnyRef` instances) and `Nothing` (used to signal abnormal termination).
+
+## [003 &mdash; Defining Value Types (snippet)](./003-snippet-defining-value-types)
+Illustrates how to define classes than extend from `AnyVal` and that represents value classes.
+
