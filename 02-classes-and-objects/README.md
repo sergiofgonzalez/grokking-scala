@@ -64,6 +64,15 @@ Basic example illustrating how to change an inheritance relationship for a compo
 ## [021 &mdash; Factory Objects (snippet)](./021-snippet-factory-objects)
 Illustrates how to define factory methods in a companion object to centralize object instantiation. As a consequence, the classes that implements a hierarchy can be completely hidden from the clients.
 
+## [022 &mdash; Hello, Traits (snippet)](./022-snippet-hello-traits)
+Introduces the concept of *trait* and how to *mix in* traits into classes.
+
+## [023 &mdash; The Ordered Trait (snippet)](./023-snippet-ordered-trait)
+An example of an Scala trait that lets you compare objects and automatically provides the comparison operators `<', `>`, `<=` and `>=` in your classes.
+
+## [024 &mdash; Traits as Stackable Modifications (snippet)](./024-snippet-traits-as-stackable-modifications)
+Illustrates the concept of stackable modifications using traits, that allow to change the behavior of an underlying existing class without having to re-implement all of its methods.
+
 ## [e01 &mdash; More on the App trait](./e01-more-on-app-trait)
 Similar to [003 &mdash; Hello, App trait](./003-hello-app-trait) but concatenating the `args` array with a list of default values to calculate.
 
