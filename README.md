@@ -9,3 +9,4 @@
   + [03 &mdash; Built-in Control Structures](03-built-in-control-structures/)
   + [04 &mdash; Functions and Closures](04-functions-and-closures/)
   + [05 &mdash; Scala's Class Hierarchy](05-scala-class-hierarchy/)
+  + [06 &mdash; Packages and Imports](06-packages-and-imports/)
