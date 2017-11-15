@@ -1,5 +1,5 @@
 # 06 &mdash; Packages and Imports
-> n/a
+> Scala's flexible system of packages and imports
 
 ## [001 &mdash; Hello, Scala Packages](./001-hello-scala-packages)
 Illustrates the basics of package definition in Scala

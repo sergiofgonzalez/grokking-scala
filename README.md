@@ -10,3 +10,4 @@
   + [04 &mdash; Functions and Closures](04-functions-and-closures/)
   + [05 &mdash; Scala's Class Hierarchy](05-scala-class-hierarchy/)
   + [06 &mdash; Packages and Imports](06-packages-and-imports/)
+  + [07 &mdash; Assertions and Tests](07-assertions-and-tests/)
