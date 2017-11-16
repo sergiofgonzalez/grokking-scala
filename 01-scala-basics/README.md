@@ -60,13 +60,13 @@ Introduces the concept of Scala tuples.
 ## [019 &mdash; Hello, Symbol literals (snippet)](./019-snippet-hello-symbol)
 Introduces the concept of Scala tuples.
 
-## [020 &mdash; Operators as Methods (snippet)](./020-operators-as-methods)
+## [020 &mdash; Operators as Methods (snippet)](./020-snippet-operators-as-methods)
 Illustrates how operators in Scala are just regular methods that are invoked with using a *operator notation* syntax.
 
-## [021 &mdash; Equality in Scala (snippet)](./021-equality)
+## [021 &mdash; Equality in Scala (snippet)](./021-snippet-equality)
 Illustrates how operators in Scala are just regular methods that are invoked with using a *operator notation* syntax.
 
-## [022 &mdash; Hello, Rich Operations (snippet)](./022-hello-rich-operations)
+## [022 &mdash; Hello, Rich Operations (snippet)](./022-snippet-hello-rich-operations)
 Illustrates how operators in Scala are just regular methods that are invoked with using a *operator notation* syntax.
 
 ## [023 &mdash; Hello, Unit (snippet)](./023-snippet-hello-unit)
