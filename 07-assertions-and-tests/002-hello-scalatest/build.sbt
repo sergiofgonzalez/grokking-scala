@@ -1,5 +1,6 @@
 val scalatest = "org.scalatest" %% "scalatest" % "3.0.4" % "test"
 
+
 lazy val commonSettings = Seq(
   organization := "com.github.sergiofgonzalez",
   version := "0.0.0-SNAPSHOT",
