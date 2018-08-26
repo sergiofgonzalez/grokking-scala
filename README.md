@@ -1,13 +1,13 @@
 # Grokking Scala
-> A collection of Scala snippets and programs
+> A collection of Scala snippets, programs and documentation
+
+Scala is a general purpose programming language that integrates features from both object-oriented and functional programming paradigms. Its name comes from *Scalable Language*.
+
 
 ## Contents
 
++ [Part 0 &mdash; Setting up shop: Installation and Setup of Scala tools and development environment](./0-setting-up-shop/README.md)
+  + [01 &mdash; Using IntelliJ on Windows: the basics](./0-setting-up-shop/01-intellij-windows-basics/README.md)
+     
 + Part 1 &mdash; Scala Fundamentals
   + [01 &mdash; Scala: the basics](01-scala-basics/)
-  + [02 &mdash; Classes and Objects](02-classes-and-objects/)
-  + [03 &mdash; Built-in Control Structures](03-built-in-control-structures/)
-  + [04 &mdash; Functions and Closures](04-functions-and-closures/)
-  + [05 &mdash; Scala's Class Hierarchy](05-scala-class-hierarchy/)
-  + [06 &mdash; Packages and Imports](06-packages-and-imports/)
-  + [07 &mdash; Assertions and Tests](07-assertions-and-tests/)

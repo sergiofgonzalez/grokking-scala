@@ -4,8 +4,9 @@
 target/
 
 # IntelliJ files
-*.iml
 .idea
+out/
+project/
 
 # vscode files
 *.code-workspace
