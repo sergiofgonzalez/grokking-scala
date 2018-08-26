@@ -3,10 +3,10 @@
 
 Setting up IntelliJ on Windows for Scala development. The details about the installation and set up can be found in the official Scala documentation from https://docs.scala-lang.org/getting-started-intellij-track/getting-started-with-scala-in-intellij.html
 
-## [01 &mdash IntelliJ Windows Basics](./01-intellij-windows-basics)
+## [01 &mdash; IntelliJ Windows Basics](./01-intellij-windows-basics)
 Basic Scala examples using IntelliJ IDE on Windows.
 
-## [02 &mdash; SBT on Linux](./02-sbt-on-linux)
+## [02 &mdash; Hello World SBT](./02-Hello-World-sbt)
 Hello World in Scala using IntelliJ on Windows, but using the Scala Build Tool (sbt) instead of the IntelliJ model for Scala. In order to run it, import the project and then configure a new *sbt task* from the *Edit Configurations...* menu with the task `run~ .` that causes SBT to rebuild and rerun the project when you save changes to a file in the project.
 
 ## [03 &mdash; Hello World IntelliJ using sbt with dependencies](./03-Hello-World-sbt-deps)
