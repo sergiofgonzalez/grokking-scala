@@ -53,7 +53,7 @@ You can list the available sbt tasks by typing `tasks` at the *sbt* prompt.
 You can check the sbt version by typing `sbt sbtVersion` in the terminal.
 
 ## Scala REPL first steps
-Scala provides a REPL (Read-Evaluate-Print-Loop) interpreter that can be used to write and run Scala programs in an interactive way. This tool includes some useful implicit imports to facilitate writing snippets. For example, you can use `println` without qualifyin it because:
+Scala provides a REPL (Read-Evaluate-Print-Loop) interpreter that can be used to write and run Scala programs in an interactive way. This tool includes some useful implicit imports to facilitate writing snippets. For example, you can use `println` without qualifying it because:
 
 ```scala
 scala> println("Hello to Jason Isaacs")
