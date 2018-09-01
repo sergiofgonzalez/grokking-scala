@@ -6,7 +6,7 @@ target/
 # IntelliJ files
 .idea
 out/
-project/
+
 
 # vscode files
 *.code-workspace

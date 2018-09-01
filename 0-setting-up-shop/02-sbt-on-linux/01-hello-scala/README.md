@@ -1,2 +1,2 @@
 # 01 &mdash; Hello Scala   
-> Hello World in Scala on Linux using SBT (Scala Build Tool)
+> Empty SBT project to test SBT and the Scala interpreter

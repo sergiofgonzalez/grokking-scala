@@ -3,7 +3,7 @@
 
 Setting up IntelliJ on Windows for Scala development. The details about the installation and set up can be found in the official Scala documentation from https://docs.scala-lang.org/getting-started-intellij-track/getting-started-with-scala-in-intellij.html
 
-## [01 &mdash; IntelliJ Windows Basics](./01-intellij-windows-basics)
+## [01 &mdash; Hello World IntelliJ](./01-Hello-World-IntelliJ)
 Basic Scala examples using IntelliJ IDE on Windows.
 
 ## [02 &mdash; Hello World SBT](./02-Hello-World-sbt)
