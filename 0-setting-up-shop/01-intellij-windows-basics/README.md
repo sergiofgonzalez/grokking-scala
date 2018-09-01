@@ -1,5 +1,5 @@
 # Scala: Setting up shop: IntelliJ Basics on Windows   
-> Basic Scala examples using IntelliJ IDE on Windows
+> Installing the *IntelliJ Scala IDE* on Windows and writing and running simple examples using IntelliJ engine and *sbt*.
 
 Setting up IntelliJ on Windows for Scala development. The details about the installation and set up can be found in the official Scala documentation from https://docs.scala-lang.org/getting-started-intellij-track/getting-started-with-scala-in-intellij.html
 
