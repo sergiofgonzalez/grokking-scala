@@ -17,11 +17,10 @@ $ sbt
 sbt:root-01-hello-scala>
 ```
 
+| Note |
+|------|
+|The previous command will create a `project/` directory |
 
----
-**NOTE**
-The previous command will create a `project/` directory
----
 
 From the *sbt* prompt you can start the *Scala REPL* by typing `console`:
 
@@ -42,10 +41,9 @@ scala> 1+2
 res3: Int = 3
 ```
 
----
-**Problems starting the console?**
-The `console` task tries to compile the current project, and if an error is found the Scala REPL will not be started. In those case, you can use the task `consoleQuick`
----
+| Problems starting the console? |
+|--------------------------------|
+| The `console` task tries to compile the current project, and if an error is found the Scala REPL will not be started. In those case, you can use the task `consoleQuick` |
 
 
 ## Listing SBT available tasks
@@ -89,10 +87,9 @@ scala> res3 *2
 res4: Int = 6
 ```
 
----
-**Packages in Scala**
-The type `Int` names the class `Int` in the package `scala`. Packages in *Scala* are similar to package in *Java*: they  provide a mechanism for information hiding and structuring
----
+| Packages in Scala |
+|-------------------|
+| The type `Int` names the class `Int` in the package `scala`. Packages in *Scala* are similar to package in *Java*: they  provide a mechanism for information hiding and structuring |
 
 
 
