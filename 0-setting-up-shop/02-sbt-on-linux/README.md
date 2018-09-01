@@ -20,7 +20,7 @@ sbt:root-01-hello-scala>
 
 ---
 **NOTE**
-The previous command will create a `project/` directory |
+The previous command will create a `project/` directory
 ---
 
 From the *sbt* prompt you can start the *Scala REPL* by typing `console`:
