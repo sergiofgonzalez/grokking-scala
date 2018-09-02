@@ -91,9 +91,13 @@ res4: Int = 6
 |-------------------|
 | The type `Int` names the class `Int` in the package `scala`. Packages in *Scala* are similar to package in *Java*: they  provide a mechanism for information hiding and structuring |
 
-
+## Writing Scala Scripts
+A Scala script is just a sequence of statements in a file that will be executed sequentially.
 
 ## Projects
 
 ### [01 &mdash; Hello Scala](./01-hello-scala)
 An empty project used to start the Scala interpreter from *SBT*.
+
+### [02 &mdash; Hello Scala Script](./02-hello-scala-script)
+Illustrates how to run Scala scripts saved in files using the Scala console `:load <file>`.
