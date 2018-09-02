@@ -14,3 +14,9 @@ Same example as above, but adding a dependency on the `build.sbt`.
 
 ## [04 &mdash; Hello ScalaTest IntelliJ sbt](./04-Hello-ScalaTest-sbt)
 An example demonstrating how to write and build a very simple test of a Scala program using ScalaTest framework and the sbt.
+
+## [05 &mdash; Hello IntelliJ Scala console](./05-Hello-IntelliJ-Scala-Console)
+Illustrates how use the Scala console can be run from IntelliJ.
+
+## [06 &mdash; Hello IntelliJ Scala worksheet](./06-Hello-IntelliJ-Scala-Worksheet)
+Illustrates how use an Scala worksheet in IntelliJ as an alternative to using the Scala console.
