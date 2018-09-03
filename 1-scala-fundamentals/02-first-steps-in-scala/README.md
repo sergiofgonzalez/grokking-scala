@@ -1,8 +1,8 @@
 # Part 1 &mdash; Scala Fundamentals &mdash; First Steps in Scala  
-> TBD a quick walkthrough of Scala features that have a feel for what Scala is
+> the most basic Scala principles 
 
 ## Introduction
-This section will introduce Scala quickly will introduce Scala concepts to enable you to start reading and writing programs in Scala. Following sections will tackle all these concepts in a more detailed way.
+This section will introduce Scala quickly will introduce Scala concepts to enable you to start reading and writing programs in Scala. Subsequent sections will tackle all these concepts in a more detailed way.
 
 ## Variable Definition
 Scala has two kind of variables:
