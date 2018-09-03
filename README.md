@@ -12,4 +12,4 @@ Scala is a general purpose programming language that integrates features from bo
      
 + [Part 1 &mdash; Scala Fundamentals](./1-scala-fundamentals)
   + [01 &mdash; Scala: A Quick Walkthrough](./1-scala-fundamentals/01-quick-scala-walkthrough/)
-  + [02 &mdash; Scala: A Quick Walkthrough](./1-scala-fundamentals/02-first-steps-in-scala/)
+  + [02 &mdash; Scala: First Steps in Scala](./1-scala-fundamentals/02-first-steps-in-scala/)
