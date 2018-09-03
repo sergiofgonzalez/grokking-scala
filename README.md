@@ -10,5 +10,6 @@ Scala is a general purpose programming language that integrates features from bo
   + [01 &mdash; Using IntelliJ on Windows: the basics](./0-setting-up-shop/01-intellij-windows-basics/README.md)
   + [02 &mdash; SBT on Linux installation and setup](./0-setting-up-shop/02-sbt-on-linux/README.md)
      
-+ [Part 1 &mdash; Scala Fundamentals](./1-scala-)
-  + [01 &mdash; Scala: the basics](01-scala-basics/)
++ [Part 1 &mdash; Scala Fundamentals](./1-scala-fundamentals)
+  + [01 &mdash; Scala: A Quick Walkthrough](./1-scala-fundamentals/01-quick-scala-walkthrough/)
+  + [02 &mdash; Scala: A Quick Walkthrough](./1-scala-fundamentals/02-first-steps-in-scala/)
