@@ -176,10 +176,7 @@ Note that:
 
 | What's happening behind the scenes in `for (i <- 0 to 2)` |
 |-----------------------------------------------------------|
-| In Scala, if a method takes only one parameter, you can call it without a dot or parentheses. In our example, the `0 to 2` is actually `(0).to(2)`, that is, the argument `0` has a `to` method that is invoked with the argument `2`.
-
-For instance, you could also do `Console println 10` which would be transformed internally to `Console.println(10)`, or `1 + 2` which would result into `(1).+(2)`.
-|
+| In Scala, if a method takes only one parameter, you can call it without a dot or parentheses. In our example, the `0 to 2` is actually `(0).to(2)`, that is, the argument `0` has a `to` method that is invoked with the argument `2`.<br>For instance, you could also do `Console println 10` which would be transformed internally to `Console.println(10)`, or `1 + 2` which would result into `(1).+(2)`. |
 
 Note also that Scala does not have operator overloading, but the fact that it does not require the use of `.` for methods taking one parameter, and that it allows you to name methods with characters like `+` or `!` will make you feel it does.
 
@@ -343,6 +340,64 @@ romanNumerals(3)
 ```
 For an example, see [09 &mdash; Hello Maps](./09-hello-maps)
 
+## A Journey to Functional Programming
+If you're coming from an imperative background, the journey to functional programming might seem daunting at first. However, you should strive for making your code as functional as possible, as you will get a lot of benefits in return.
+
+When facing a piece of imperative code that you should refactor into a functional one think about:
++ how to get rid of `var` &mdash; you should strive for immutability
++ look for functions without side effects &mdash; use referencial transparency
+
+See [10 &mdash; From Imperative to Functional Programming](./10-from-imperative-to-fp) for basic example of such transformation.
+
+Pure imperative
+```scala
+def printArgs(args: Array[String]): Unit = {
+  var i = 0
+  while (i < args.length) {
+    println(args(i))
+    i += 1
+  }
+}
+```
+
+In the first step, remove the `var` and use functional approach to iteration:
+```scala
+def printArgs(args: Array[String]): Unit = {
+  for (arg <- args)
+    println(arg)
+}
+
+// or...
+def printArgs3(args: Array[String]): Unit = {
+  args.foreach(arg => println(arg))
+}
+
+// or...
+def printArgs4(args: Array[String]): Unit = {
+  args.foreach(println)
+}
+```
+
+But then, you have to remove the side effects for the function:
+
+```scala
+def formatArgs(args: Array[String]) = args.mkString("\n")
+```
+
+The immediate benefit is that you will be able to check that the functions does exactly what it is supposed to do:
+
+```scala
+val result = formatArgs(Array("One", "Two", "Three"))
+assert(result == "One\nTwo\nThree")
+```
+
+In summary:
++ prefer `val` over `var`
++ use immutable objects
++ use methods without side effects
+
+For a more contrived example, see [11 &mdash; Read lines from a file in Scala](./11-read-lines-from-a-file). The example imports the `scala.io.Source` package, which exposes a method `Source.fromFile(arg).getLines()` that returns a structure that you can iterate over.
+
 ## Projects
 
 ### [01 &mdash; Scala Playground](./01-scala-playground)
@@ -371,3 +426,12 @@ Illustrates how to create and use Sets in Scala.
 
 ### [09 &mdash; Hello Maps](./09-hello-maps)
 Illustrates how to create and use Maps in Scala.
+
+### [10 &mdash; From Imperative to Functional Programming](./10-from-imperative-to-fp)
+Illustrates how to transform a piece of code from an imperative to a functional programming style.
+
+### [11 &mdash; Read lines from a file in Scala](./11-read-lines-from-a-file)
+Illustrates how to write a simple program in Scala that read lines from a file and prints those lines prepended by the number of characters of each line.
+
+### [e01 &mdash; Grokking `reduceLeft`](./e01-grokking-reduce-left)
+An understanding exercise of `reduceLeft` operation in Scala
