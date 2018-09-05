@@ -1,7 +1,6 @@
 # Part 1 &mdash; Scala Fundamentals   
-> a detailed walkthrough of Scala features
+> just enough info to get you started with Scala
 
-This section explores how to install the official Scala IDE (IntelliJ Community) on Windows and the SBT (Scala Build Tool) on Ubuntu.
 The section does not assume any previous experience with the Scala language.
 
 ## [01 &mdash; Quick walkthrough of Scala features](./01-quick-scala-walkthrough)
