@@ -1,5 +1,5 @@
-# Part 1 &mdash; Scala In Depth: Classes and Objects  
-> TBD
+# Part 2 &mdash; Scala In Depth: Classes and Objects  
+> Foundational concepts on classes and objects 
 
 ---
   + Introducing classes, fields and methods
@@ -219,15 +219,51 @@ The `import` statement makes available the `calculate` method from the previous 
 |------------------|
 | Scala implicitly imports the members of the packages `java.lang` and `scala`, as well as the members of a singleton object named `Predef` into every Scala source code file.<br>
 `Predef` resides in the `scala` package and contains many useful methods such as `println` and `assert`.
+|
 
 Note that Scala does not require you to match the name of the file with the name of the class you put in it, but it is considered a good practice to do that.
 
 See [02 &mdash; Hello Scala Application](./02-hello-scala-application-sbt) for an example you can run and debug.
 
+## The `App` Trait
+Scala provides a *trait*, `scala.App`, that simplifies the way in which entrypoints are defined.
+
+```scala
+// file: FallWinterSpringSummer.scala
+import ChecksumCalculator.calculate
+
+object FallWinterSpringSummer extends App {
+
+  for (season <- List("fall", "winter", "spring", "summer"))
+    println(season + ": " + calculate(season))
+```
+
+That is, by making your object extends from `App` you will no longer need to define the `main()` method, and instead you will be able to write the body of the application between the curly braces of the singleton object.
+
+| How to access the command line arguments when using the `App` trait             |
+|---------------------------------------------------------------------------------|
+| You can access the command-line arguments via an array of strings named `args`. |
+
+See [03 &mdash; Hello App Trait SBT] (./03-hello-app-trait-sbt) for an example.
+
+---
+## You know you've mastered this chapter when...
++ You know how to define classes, public and private fields and methods for your classes
++ You are aware of the semicolon inference rules that allow you to leave off the semicolon at the end of the statements in most of the cases, and how to prevent *automatic spanning* using parentheses
++ You know about *Singleton objects* and their role as *a class's companion object* when they share the same name and source code file of a class.
++ You know how to define a *standalone singleton object* that serves as an entry point for an Scala application, and how to simplify the approach using the `App` trait
++ You are comfortable with IntelliJ IDE running worksheets for quick prototyping, and running and debugging applications. 
++ You are comfortable starting the Scala console within SBT, and running
+---
+
+
 ## Projects
 
-### [01 &mdash; Classes and Objects](./01-classes-and-objects)
+### [01 &mdash; Classes and Objects](./01-classes-and-objects-worksheet)
 IntelliJ worksheet project with several worksheet illustrating the concepts of the section.
 
 ### [02 &mdash; Hello Scala Application](./02-hello-scala-application-sbt)
 Simple SBT project that illustrates how to define an application entrypoint in Scala.
+
+### [03 &mdash; Hello App Trait SBT] (./03-hello-app-trait-sbt)
+Simple SBT project that illustrates how to define an applicaiton entrypoint in Scala by extending the `App` trait.
