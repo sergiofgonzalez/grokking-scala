@@ -12,3 +12,6 @@ Playground for Scala Symbols.
 
 + [03 &mdash; String Interpolation](./03-string-interpolation.sc)
 Playground for Scala string interpolation.
+
++ [04 &mdash; Operators](./04-operators.sc)
+Playground for Scala operators.
