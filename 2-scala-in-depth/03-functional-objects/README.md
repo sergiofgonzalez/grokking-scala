@@ -321,6 +321,27 @@ res4: Rational = 2/3
 ```
 
 ## Identifiers in Scala
+Scala has very flexible rules for forming identifiers. There are namely four types of identifiers:
++ alphanumeric identifiers
++ operator identifiers
++ constant identifiers
++ literal identifiers
+
+An alphanumeric identifier starts with a letter or an underscore, followed by further letters, digits or underscored. The `$` is considered a letter, but it is reserved for identifiers used by the Scala compiler and should not be used.
+
+Scala follows Java's convention for identifiers (camel-case, fields, methods, functions, local variables and method parameters starting with lowercase as in *toString*, classes and traits starting with capital letters as *HashSet*). Although underscores are legal identifiers, they are not typically used in Scala programs.
+
+In Scala the word `constant` is not the same as `val`. Even though a val remains constant after it is initialized, it is still a variable. A `constant` is more permanent than `val`. For example, `scala.math.Pi` is a constant. Constants can also be used for *magic numbers* in your code. Constants can also be used in *pattern matching*. In Scala, the naming convention for constants is to make the first character upper case (thus a constant in Java named MAX_VALUE will be named MaxValue).
+
+An operator identifier consists of one or more operator characters (printable ASCII characters such as *+*, *:*, *?*, *~* or *#*). Examples are `+`, `++`, `:::`, `<?>`. The Scala compiler will transform the operator identifiers to make them run on the JVM.
+
+| A word of caution with operator identifiers interpretation |
+|------------------------------------------------------------|
+| The flexibility that Scala adds to  operator identifiers make that some expressions such as:<br>`x<-y` might be parsed incorrectly, because it will try to look for an operator identifier named `<-` while in reality you might be trying to compare `x` and `-y`.<br>In those circumstances, you have to insert spaces as in `x < -y` or use parentheses.|
+
+A literal identifier is an arbitrary string enclosed in backticks as *&#96;yield&#96;*, *&#96;<clinit>&#96;* and *&#96;x&#96;*. The idea is that you can put any string that's accepted by the runtime as an identifier between back ticks. The result is always a Scala identifier. This works even if the name container in the back ticks would be a Scala reserved word. For example, as *yield* is a reserved word in a Scala you cannot name a method `MyClass.yield()` but you could be able to use `MyClass.*&#96;yield()*&#96;*`.
+
+
 
 ---
 ## You know you've mastered this chapter when...
