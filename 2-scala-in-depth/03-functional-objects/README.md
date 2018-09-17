@@ -1,15 +1,18 @@
 # Part 2 &mdash; Scala In Depth: Functional Objects
 > Designing objects in a functional way 
 
---- TBD
-  + Introducting Scala's basic types: `Byte`, `Short`, `Int`...
-  + Literals syntax for integral types, floats, characters, strings, booleans and symbols
-  + Scala's string interpolators: the *s*, *raw string* and *f* string interpolators
-  + Operators as regular methods: rules for infix, prefix and postfix operators
-  + Arithmetic, relational, bitwise and logical operations in Scala
-  + Object equality in Scala
-  + Operator precedence and associativity
-  + Additional methods on basic types: rich wrapper API
+--- 
+  + Specifying the primary constructor for a class: class parameters
+  + Overriding methods from a superclass
+  + Adding preconditions to a class
+  + Defining Fields in a class
+  + Self References: the `this` keyword
+  + Specifying Auxiliary Constructors
+  + Defining Private Fields and Methods
+  + Creating Operators
+  + The four types of identifiers in Scala
+  + Using Method Overloading
+  + Implicit Conversions mechanism
 ---
 
 ## Intro
@@ -146,7 +149,7 @@ val m = twoThirds.denom   // -> 3
 ```
 
 ## Self references
-The keyword `this` can be used to refere to the object instance on which the currently executing method was invoked, or if invoked in a constructor, the object instance being constructed.
+The keyword `this` can be used to refer to the object instance on which the currently executing method was invoked, or if invoked in a constructor, the object instance being constructed.
 For example, the `lessThan` method can be programmed as:
 ```scala
 class Rational(n: Int, d: Int) {
@@ -341,33 +344,99 @@ An operator identifier consists of one or more operator characters (printable AS
 
 A literal identifier is an arbitrary string enclosed in backticks as *&#96;yield&#96;*, *&#96;<clinit>&#96;* and *&#96;x&#96;*. The idea is that you can put any string that's accepted by the runtime as an identifier between back ticks. The result is always a Scala identifier. This works even if the name container in the back ticks would be a Scala reserved word. For example, as *yield* is a reserved word in a Scala you cannot name a method `MyClass.yield()` but you could be able to use `MyClass.*&#96;yield()*&#96;*`.
 
+## Method Overloading
+In this section, we will introduce method overloading in our *Rational* class to be able to do mixed arithmetic. That is, doing operations with a *Rational* and a number of other type (i.e. *Int*).
 
+```scala
+class Rational(n: Int, d: Int) {
+  // precondition
+  require(d != 0)
+
+  // fields
+  private val g = gcd(n.abs, d.abs)
+  val numer: Int = n / g
+  val denom: Int = d / g
+
+  // auxiliary constructors
+  def this(n: Int) = this(n, 1)
+
+  // toString override
+  override def toString: String = s"$numer/$denom"
+
+  // methods
+  def +(other: Rational): Rational = new Rational(numer * other.denom + other.numer * denom, denom * other.denom)
+  def +(other: Int): Rational = new Rational(numer + other * denom, denom)
+
+  def -(other: Rational): Rational = new Rational(numer * other.denom - other.numer * denom, denom * other.denom)
+  def -(other: Int): Rational = new Rational(numer - other * denom, denom)
+
+  def *(other: Rational): Rational = new Rational(numer * other.numer, denom * other.denom)
+  def *(other: Int): Rational = new Rational(numer * other, denom)
+
+  def /(other: Rational): Rational = new Rational(numer * other.denom, denom * other.numer)
+  def /(other: Int): Rational = new Rational(numer, denom * other)
+
+  // private methods
+  private def gcd(a: Int, b: Int): Int = {
+    if (b == 0) a else gcd(b, a % b)
+  }
+}
+```
+
+Now the arithmetic operators are overloaded, meaning that each name is now being used by multiple methods. When that happens, the compiler chooses the method that correctly matches the types of the arguments. When using the operator syntax, this is decided by the type of the right hand operator.
+
+## Implicit Conversions
+Note that if you try to do:
+
+```scala
+scala> 2 * oneHalf
+Error:(58, 70) overloaded method value * with alternatives:
+  (x: Double)Double <and>
+  (x: Float)Float <and>
+  (x: Long)Long <and>
+  (x: Int)Int <and>
+  (x: Char)Int <and>
+  (x: Short)Int <and>
+  (x: Byte)Int
+ cannot be applied to (A$A4.this.Rational)
+def get$$instance$$res6 = /* ###worksheet### generated $$end$$ */ 2 * oneHalf
+                                                                    ^
+```
+
+In the method resolution, the Scala compiler cannot find a method `*` in the `Int` class that can be applied to a `Rational` and thus it fails.
+
+In order to solve this, Scala provides a mechanism known as *implicit conversion* that can be used to tell the system how to convert from an `Int` to a `Rational`.
+
+```scala
+implicit def intToRational(x: Int): Rational = new Rational(x)
+
+val twoThirds = new Rational(2, 3)
+2 * twoThirds // -> 4 / 3
+```
+
+For an implicit conversion to work, it needs to be in scope. If you place that definition inside the `Rational` class definition it won't be in scope for the interpreter. In a future part, we'll deal with techniques that will let you bring them into scope properly.
+
+| A word of caution on operators and implicit conversions    |
+|------------------------------------------------------------|
+| The use of operator methods and implicit conversions can give rise to client code that is hard to read and understand. The goal to keep in mind when designing libraries is not merely enabling concise client code, but readable, understandable client code. Conciseness can be a big part of readability, but when taken too far it can be counterproductive. |
 
 ---
 ## You know you've mastered this chapter when...
 
-+ You are aware of the different *basic types* that Scala provides and recognize them as full-fledged objects (rather than primitive types as in other programming languages).
-+ You know how to define integer, floating point, character, string, boolean and symbol literals. You must be aware of the intrincacies of each literal definitions:
-  + decimal and hexadecimal literals for integer types, the *L* (or *l*) suffix to specify *Longs* and how to force the exact type of an integer literal (by declaring its type). 
-  + exponent notation for floats and the *F* (or *f*) and *D* (or *d*) to give the specific type.
-  + escape sequences and Unicode specification of character literals.
-  + raw strings and how to use them.
-  + symbol literals and what they try to achieve (where you'd use an identifier in a dynamically typed language).
-+ You're aware of the different string interpolators available in Scala, the *s interpolator*, the *raw string interpolator* and the *f string interpolator*.
-+ You're aware that operators in Scala are just regular methods that are invoked using a special syntax that feels more natural for certain operations. You must know that methods can be overloaded and that there are different rules for *infix*, *prefix* and *postfix* operators. You're aware that only a bunch of characters can be used as *prefix* operators and must follow a strict naming rule (`unary_<char>`).
-+ You're comfortable with arithmetic, relational and logical operations and bitwise operations
-+ You're aware of how to check for object equality in Scala using `==` and `!=` and that Scala provides a special operator to check for *reference equality* (`eq` and `ne`).
-+ You're aware of the operator precedence and associativity rules.
-+ You know about the basic types rich wrappers, which provide additional methods on basic types.
++ You're comfortable with the syntax for a class primary constructor, and how you include code directly into the class's body.
++ You're comfortable using the syntax that allows you to override methods defined in super classes.
++ You know how to include preconditions in a class's body to be executed during instance construction.
++ You're comfortable adding (*public*) fields in a class.
++ You know how to use `this` keyword in Scala to reference the current object instance.
++ You're comfortable defining auxiliary constructors in a class, and you're aware on the specific rules for auxiliary constructors in Scala (they must invoke another constructor of the same class as its first action).
++ You know to how to add private fields and methods to a class.
++ You're comfortable defining *operators* in a class.
++ You're aware of the four types of identifiers in Scala: alphanumeric identifiers, operator identifiers, constant identifiers and literal identifiers.
++ You're comfortable with method overloading mechanism in Scala.
++ You're aware of the implicit conversion mechanism in Scala, that allows you to convert automatically between types.
 ---
 
 ## Projects
 
 ### [01 &mdash; Basic Types and Operations](./01-basic-types-and-operations-worksheet)
 IntelliJ worksheet project with several worksheet illustrating the concepts of the section.
-
-### [02 &mdash; Hello Scala Application](./02-hello-scala-application-sbt)
-Simple SBT project that illustrates how to define an application entrypoint in Scala.
-
-### [03 &mdash; Hello App Trait SBT] (./03-hello-app-trait-sbt)
-Simple SBT project that illustrates how to define an applicaiton entrypoint in Scala by extending the `App` trait.

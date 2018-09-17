@@ -15,7 +15,8 @@ class Rational(n: Int, d: Int) {
   override def toString: String = s"$numer/$denom"
 
   // methods
-  def add(other: Rational): Rational = new Rational(numer * other.denom + other.numer * denom, denom * other.denom)
+  def +(other: Rational): Rational = new Rational(numer * other.denom + other.numer * denom, denom * other.denom)
+  def *(other: Rational): Rational = new Rational(numer * other.numer, denom * other.denom)
   def lessThan(other: Rational): Boolean = this.numer * other.denom < other.numer * this.denom
   def max(other: Rational): Rational = if (this lessThan other) other else this
 
@@ -26,6 +27,13 @@ class Rational(n: Int, d: Int) {
 }
 
 
-val fourSixths = new Rational(4, 6)
-val r = new Rational(66, 42)
+val oneHalf = new Rational(1, 2)
+val twoThirds = new Rational(2, 3)
+oneHalf + twoThirds
+oneHalf * twoThirds // result is normalized by construction!
+
+// associativity works as expected
+oneHalf + oneHalf * twoThirds
+oneHalf + (oneHalf * twoThirds)
+(oneHalf + oneHalf) * twoThirds
 

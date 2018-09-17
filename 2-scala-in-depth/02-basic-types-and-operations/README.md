@@ -2,7 +2,7 @@
 > Scala's basic types and how to use them 
 
 ---
-  + Introducting Scala's basic types: `Byte`, `Short`, `Int`...
+  + Introducing Scala's basic types: `Byte`, `Short`, `Int`...
   + Literals syntax for integral types, floats, characters, strings, booleans and symbols
   + Scala's string interpolators: the *s*, *raw string* and *f* string interpolators
   + Operators as regular methods: rules for infix, prefix and postfix operators

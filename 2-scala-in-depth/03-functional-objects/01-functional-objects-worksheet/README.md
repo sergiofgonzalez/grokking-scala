@@ -36,3 +36,9 @@ Introduces the normalization concept with a private method that computes the *gr
 
 + [11 &mdash; Adding operators](./11-adding-operators.sc)
 Renames existing methods to that the usage of those methods as operators will feel more natural.
+
++ [12 &mdash; Mixed Arithmetic Support](./12-mixed-arithmetic-support.sc)
+Adds methods to the `Rational` class to perform mixed arithmetic using method overloading.
+
++ [13 &mdash; Implicit Conversions](./13-implicit-conversions.sc)
+Adds an *implicit conversion* method, to be able to convert from `Int` to `Rational`.
