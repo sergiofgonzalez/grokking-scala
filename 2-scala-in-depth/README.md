@@ -6,10 +6,12 @@
 Foundational concepts on classes and objects.
 
 ## [02 &mdash; Basic Types and Operations](./02-basic-types-and-operations)
-Scala's basic types and how to use them
+Scala's basic types and how to use them.
 
 ## [03 &mdash; Functional Objects](./03-functional-objects)
-Designing objects in a functional style
+Designing objects in a functional style.
 
+## [04 &mdash; Built-in Control Structures](./04-built-in-control-structures)
+Introducing Scala's built-in control structures.
 
 

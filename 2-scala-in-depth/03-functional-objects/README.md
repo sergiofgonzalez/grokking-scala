@@ -438,5 +438,5 @@ For an implicit conversion to work, it needs to be in scope. If you place that d
 
 ## Projects
 
-### [01 &mdash; Basic Types and Operations](./01-basic-types-and-operations-worksheet)
+### [01 &mdash; Functional Objects Worksheet](./01-functional-objects-worksheet)
 IntelliJ worksheet project with several worksheet illustrating the concepts of the section.
