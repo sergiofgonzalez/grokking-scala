@@ -15,3 +15,6 @@ Understanding the `Unit` concept.
 
 + [04 &mdash; *for* expressions](./04-for-expressions.sc)
 Playground for Scala's *for expressions*.
+
++ [05 &mdash; Exceptions](./05-exceptions.sc)
+Playground for Scala's exceptions.

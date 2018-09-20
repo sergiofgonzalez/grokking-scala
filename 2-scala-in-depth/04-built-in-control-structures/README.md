@@ -233,6 +233,10 @@ batFiles // <- Array[File] = Array("idea.bat", ...)
 
 The result will include all of the yielded values contained in a single collection. The type of the resulting collection is based on the kind of collections processed in the iterations clauses. As `filesHere` is an array, and the type of the yielded expression is `File` the result is `Array[File]`.
 
+| Using `yield` in a *for expression* |
+|-------------------------------------|
+| It must be noted that the `yield` keyword must be placed before the entire body, so if the for expression body is composed of several lines, therefore needing a curly brace to group them, yield should be used before the curly braces. |
+
 The following piece of code transform a list of files into a list of integers:
 
 ```scala
@@ -251,10 +255,85 @@ val lineLengths =
 
 In this example, an `Array[File]` is transformed into another one containing only the `*.bat ` files. For each of these, an `Iterator[String]` is generated (the result of the `fileLines` method). This initial iterator is transformed into another one of the same type containing only the trimmed lines matching the pattern. Finally, the length of these lines is yielded. 
 
+
+
 ## Exception Handling with *Try Expressions*
+Instead of returning a value in the normal way, a method can terminate by throwing an exception. The method's caller can either catch and handle that exception, or ignore it, in which case the exception propagates to the caller's caller. This propagation mechanism continues (unwinding the call stack), until a method handles the exception or there are no more methods left.
+
+### Throwing Exceptions
+To throw an exception, you create an exception object and then throw it:
+
+```scala
+throw new IllegalArgumentException
+```
+
+In Scala, `throw` is an expression that has a result type:
+```scala
+val half =
+  if (n % 2 == 0)
+    n / 2
+  else
+    throw new RuntimeException("n must be an even number")
+```
+
+In the previous piece of code, an exception will be thrown if *n* is an odd number. Any context that tries to use the return value from a throw will never get to do so, and thus no harm will come.
+
+Technically, an exception thrown has type `Nothing`. You can use a throw as an expression even though it will never evaluate to anything. This means that the type of `half` will be the type of the branch which does computer something.
+
+### Catching Exceptions
+You can catch exceptions using the following syntax:
+
+```scala
+import java.io.FileNotFoundException
+import java.io.FileReader
+import java.io.IOException
+
+try {
+    val f = new FileReader("input.txt")
+} catch {
+    case ex: FileNotFoundException => // handle missing file
+    case ex: IOException => // handle I/O related error
+}
+```
+
+Note that the syntax for the catch clause is consistent with Scala's pattern matching feature. The behavior, however, is the same as in other languages with exceptions. The body is executed, and if it throws an exception, each catch clause is tried in turn. In the example above, if an exception is found, the first clause will be tried, then the second. If the exception is neither `FileNotFoundException` or `IOException` the tr-catch will terminate and the exception will propagate further.
+
+| Note on `@throws` annotation |
+|------------------------------|
+| Unlike Java, Scala does not require you to catch *checked* exceptions or declare them in a *throws* clause. You can however, use the `@throws` annotation but it is not required. |
+
+### The `finally` clause
+You can wrap an expression with a finally clause if you want some code to execute no matter how the expression terminates.
+
+```scala
+val file = new FileReader("input.txt")
+try {
+    // work with the file here
+} finally {
+    file.close()
+}
+```
+
+The previous piece of code ensures that no matter whether an exception is thrown while working with the file, it gets properly closed.
+
+### Yielding a value
+As with most Scala control structures, *try-catch-finally* is also an expression and results in a value.
+
+For example, the following piece of code tries to parse a URL but uses a default value if the URL is badly formed.
+The result is that of the try clause if no exception is thrown, or the relevant catch clause if an exception is thrown and caught. If an exception is thrown but not caught, the expression has no result at all. The value computed in the finally clause (if there is one), is dropped.
+
+```scala
+def urlFor(path: String) =
+    try {
+        new URL(path)
+    } catch {
+        case e: MalformedURLException => new URL("http://www.scala-lang.org")
+    }
+```
+
+## Match Expressions
 
 
-It must be noted that the `yield` keyword must be placed before the entire body, so if the for expression body is composed of several lines, therefore needing a curly brace to group them, yield should be used before the curly braces.
 
 ---
 ## You know you've mastered this chapter when...
