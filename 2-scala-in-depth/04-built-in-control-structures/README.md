@@ -1,8 +1,15 @@
 # Part 2 &mdash; Scala In Depth: Built-in Control Structures
 > Introducing Scala's built-in control structures.
 
---- TBD
+---
   + Introducing Scala's `if` expression
+  + The *while loop*: the `Unit` type and the *unit value* `()`
+  + *For expressions*: generators. Filtering and mapping with *for expressions*. Nested iteration.
+  + Exception handling in Scala: throwing and catching exceptions. The `finally` clause.
+  + Introducing Scala's *match* expression mechanism
+  + Alternatives to *break* and *continue*
+  + Variable scope
+  + Tips for refactoring imperative code
 ---
 
 ## Intro
@@ -332,25 +339,229 @@ def urlFor(path: String) =
 ```
 
 ## Match Expressions
+Scala's *match expression* lets you select from a number of alternatives, just like a *switch* statement in other languages, but using an arbitrary pattern.
+
+As an example, the following piece of code reads a food name and prints a companion to that food:
+
+```scala
+val mainDish = "chips"
+
+mainDish match {
+  case "salt" => println("pepper")
+  case "chips" => println("salsa")
+  case "eggs" => println("bacon")
+  case _ => println("huh?")  
+}
+```
+
+There are a few differences from Java's *switch statement*.
++ The default case is specified with an underscore, a *wildcard* symbol frequently used in Scala as a placeholder for a completely unknown value.
++ Any kind of constant (as well as other things) can be used in the cases, not only integer and Strings.
++ There are no breaks at the end of each alternative &mdash; the break is implicit and there is no fall-through from one alternative to the next.
++ The *match expression* results in a value
 
 
+```scala
+val friend = mainDish match {
+  case "salt" => "pepper"
+  case "chips" => "salsa"
+  case "eggs" => "bacon"
+  case _ => "huh?"
+}
+
+println(friend)
+```
+
+## Living without *break* and *continue*
+Scala leaves out *break* and *continue* commands because they do not get along well with function literals. However it is possible to rewrite those using other constructs.
+
+Consider, for example, the following piece of Java code which iterates over the list of arguments, considering  all arguments prefixed by *-* and breaking the loop as soon as it finds an argument that ends in `".scala"`
+```java
+// Java
+int i = 0
+boolean foundIt = false;
+while (i < args.length) {
+  if (args[i].startsWith("-")) {
+    i = i + 1;
+    continue;
+  }
+  if (args[i].endsWith(".scala")) {
+    foundIt = true;
+    break;
+  }
+  i = i + 1;
+}
+```
+
+This can be rewritten in Scala as:
+```scala
+var i = 0
+var foundIt = false
+while (i <  args.length && !foundIt) {
+  if (!args(i).startsWith("-")) {
+    if (args(i).endsWith(".scala"))
+      foundIt = true
+  }
+  i = i + 1
+}
+```
+
+However, the code can be further improved to make it more functional. We want to get rid of the *while loop* and the mutable variables:
+
+```scala
+def searchFrom(i: Int): Int = {
+  if ( i >= args.length) - 1
+  else if (args(i).startsWith("-")) searchFrom(i + 1)
+  else if (args(i).endsWith(".scala")) i
+  else searchFrom(i + 1)
+}
+```
+
+However, the `scala.util.control.Breaks` class provides a break method you can use to exist an enclosing block that is marked with the `breakable` keyword:
+
+```scala
+import scala.util.control.Breaks._
+import java.io._
+
+val input = "this is one line\n" +
+            "this is another line\n" +
+            "this is the third line\n" +
+            "\n" +
+            "this won't be read at all\n"
+
+val in = new BufferedReader(new StringReader(input))
+
+breakable {
+  while (true) {
+    println("? ")
+    if (in.readLine() == "") break
+  }
+}
+println("done!")
+```
+
+The previous piece of code will repeatedly read lines from the string until an empty line is found. The `Breaks` class implements break by throwing an exception that is caught by an enclosing application of the `breakable` method. The Scala syntax rules that allows you to use curly braces instead of parentheses, makes the *breakable* keyword feel like it is a built-in keyword.
+
+## Variable Scope
+Variable declarations in Scala programs have a *scope* that defines where you can use the name. The most common example of scoping is that curly braces generally introduce a new scope, so anything defined inside curly braces leaves scope after the final closing brace.
+
+Consider the following example, which prints a multiplication table:
+
+```scala
+def printMultiTable() = {
+  var i = 1
+  // only i in scope here
+  while (i <= 10) {
+    var j = 1
+    // both i and j in scope here
+    while (j <= 10) {
+      val prod = (i * j).toString
+      // i, j, and prod in scope here
+      var k = prod.length
+      // i, j, prod, and k in scope here
+      while (k < 4) {
+        print(" ")
+        k += 1
+      }
+      print(prod)
+      j += 1
+    }
+    // i and j still in scope; prod and k out of scope
+    println()
+    i += 1
+  }
+  // i still in scope; j, prod, and k out of scope
+}
+```
+
+All variables in the example are *local variables* meaning they can only be used in the function in which they are defined.
+
+Once you define a variable, you can't define a new variable with the same name in the same scope. For example, the following code will not compile:
+
+```scala
+val a = 1
+val a = 2 // ERR!
+```
+
+However, you can define a variable in an inner scope that has the same name as a variable in the outer scope.
+```scala
+val a = 1;
+{
+  val a = 2
+  println(s"a=$a")
+}
+println(s"a=$a")
+```
+
+## Refactoring Imperative-Style Code
+In this section, it will be shown how the imperative piece of code from the previous section is refactored in a more functional way. Guidelines will be given, explaining the rationale behind those changes:
+
+```scala
+// Returns a row as a sequence
+def makeRowSeq(row: Int) =
+  for (col <- 1 to 10) yield {
+    val prod = (row * col).toString
+    val padding = " " * (4 - prod.length)
+    padding + prod
+  }
+
+// Returns a row as a String
+def makeRow(row: Int) = makeRowSeq(row).mkString
+
+// Returns table as a string with one row per line
+def multiTable() = {
+  val tableSeq =
+    for (row <- 1 to 10)
+      yield makeRow(row)
+  tableSeq.mkString("\n")
+}
+
+val multiplicationTable = multiTable()
+println(multiplicationTable)
+```
+
+First, the `printMultiTable` was refactored to return a string instead of having a side effect. The function was then renamed to `multiTable` as it no longer prints anything.
+| Takeaway #1: use functions without side-effects |
+|-------------------------------------------------|
+| Side-effects free functions are easier to test. For example, to test `multiTable` we just have to establish assertions on the result of a function (as string). However, to test `printMultiTable` we will need to mock the `println` and `print` methods. |
+
+The `multiTable` function uses does not feature a *while loop* or *vars* and rathe uses *val* (immutables), *for expressions* (which return a value, rather than modifying state), and helper functions.
+| Takeaway #2: favor immutability and expressions |
+|-------------------------------------------------|
+| Immutable variables are less prone to errors because of inadvertent changes. Expressions are also more functional as they return values instead of producing side-effects. |
+
+The functional code also includes refactoring of the imperative code to improve readability while also assigning clear responsibilities to the functions. The `makeRowSeq` uses a *for expression* whose generator iterates through column numbers 1 through 10. The body calculates the product of row and column, determines the padding needed for the product and yields the result of concatenating the padding and product strings.
+
+The result of the *for expression* will be a *sequence*, which is a Scala collection that contains as elements those strings. 
+
+The other helper function just calls `mkString`, a Scala method that lets you join the results returned by the `makeRowSeq` function.
+
+| Takeaway #3: create small functions that decompose the problem in pieces |
+|--------------------------------------------------------------------------|
+| Creating small functions with clear responsibilities will improve code's readability and maintainability. |
+
+
+Finally, the `multiTable` method will collect in a sequence of strings the result of calling `makeRow` with a *for expression* whose generator iterates through row numbers 1 to 10. Once we get the sequence, we flatten it by calling `mkString("\n")` which will *join* the sequence elements by the given string delimiter.
 
 ---
 ## You know you've mastered this chapter when...
 
 + You're comfortable using the `if` expression, and acknowledge it is more akin to the *ternary operator* than the traditional imperative *if* found in other programming languages.
-+ You're aware of the `while` and *do-while* loops and understand that you should try and challenge loops as they're not expressions &mdash; they result in `Unit`.
++ You're comfortable writing *while* and *do-while* loops and understand that you should try and challenge them in the functional world as they're not expressions &mdash; they result in `Unit`.
 + You're aware of the *unit value*  `()` which is the result value of expressions returning `Unit`. Procedures (i.e. functions that do not return a value) and reassignment to vars are expressions of this type.
-
++ You understand the *for expressions* in Scala, how you iterate over elements with a *generator* (e.g. `file <- files` and `i <- 1 to 10`), and the syntax rules to return a value from the *for expression's body*.
++ You are aware of the syntax for filtering within *for expressions* using an *if clause*.
++ You are comfortable doing nested iteration with *for expressions*, probably intertwined with *if clauses* for filtering. You understand the rules for variable scope in these situations.
++ You know how to use mid-stream variable bindings &mdash; defining intermediate variables while specifying the *for expression*. 
++ You understand the basics of Scala's exception handling &mdash; *try-catch expressions*, the *finally* keyword and how *try-catch* actually produces a value in Scala.
++ You are familiar with the syntax for catching exceptions in Scala.
++ You're comfortable with the syntax of the *match expression* in Scala, and how it relates (for now) to the *switch-case* in other programming languages.
++ You're aware that Scala does not feature *break* and *continue*, but you know how to survive without it.
++ You're familiar with the rules for variable scope in Scala.
++ You're aware of the tips for refactoring imperative code into a more functional way.
 ---
 
 ## Projects
 
 ### [01 &mdash; Built-in Control Structures](./01-built-in-control-structures-worksheet)
 IntelliJ worksheet project with several worksheet illustrating the concepts of the section.
-
-### [02 &mdash; Hello Scala Application](./02-hello-scala-application-sbt)
-Simple SBT project that illustrates how to define an application entrypoint in Scala.
-
-### [03 &mdash; Hello App Trait SBT] (./03-hello-app-trait-sbt)
-Simple SBT project that illustrates how to define an applicaiton entrypoint in Scala by extending the `App` trait.

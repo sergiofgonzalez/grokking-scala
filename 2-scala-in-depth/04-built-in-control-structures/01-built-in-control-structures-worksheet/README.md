@@ -18,3 +18,15 @@ Playground for Scala's *for expressions*.
 
 + [05 &mdash; Exceptions](./05-exceptions.sc)
 Playground for Scala's exceptions.
+
++ [06 &mdash; Hello, Match Expressions](./06-hello-match-expressions.sc)
+Playground for Scala's exceptions.
+
++ [07 &mdash; Living without *break* and *continue*](./07-no-break-and-continue.sc)
+Playground for transforming *break* and *continue* keywords into Scala code.
+
++ [08 &mdash; Variable Scope](./08-variable-scope.sc)
+Playground for transforming variable scoping in Scala.
+
++ [09 &mdash; Refactoring Imperative Code](./09-refactoring-imperative code.sc)
+An example of how an imperative piece of code can be transformed into a functional one.
