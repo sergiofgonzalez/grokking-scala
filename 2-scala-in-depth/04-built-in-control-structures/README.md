@@ -548,7 +548,7 @@ Finally, the `multiTable` method will collect in a sequence of strings the resul
 
 + You're comfortable using the `if` expression, and acknowledge it is more akin to the *ternary operator* than the traditional imperative *if* found in other programming languages.
 + You're comfortable writing *while* and *do-while* loops and understand that you should try and challenge them in the functional world as they're not expressions &mdash; they result in `Unit`.
-+ You're aware of the *unit value*  `()` which is the result value of expressions returning `Unit`. Procedures (i.e. functions that do not return a value) and reassignment to vars are expressions of this type.
++ You're aware of the *unit value* `()` which is the result value of expressions returning `Unit`. Procedures (i.e. functions that do not return a value) and reassignment to vars are expressions of this type.
 + You understand the *for expressions* in Scala, how you iterate over elements with a *generator* (e.g. `file <- files` and `i <- 1 to 10`), and the syntax rules to return a value from the *for expression's body*.
 + You are aware of the syntax for filtering within *for expressions* using an *if clause*.
 + You are comfortable doing nested iteration with *for expressions*, probably intertwined with *if clauses* for filtering. You understand the rules for variable scope in these situations.

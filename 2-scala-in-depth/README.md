@@ -14,4 +14,5 @@ Designing objects in a functional style.
 ## [04 &mdash; Built-in Control Structures](./04-built-in-control-structures)
 Introducing Scala's built-in control structures.
 
-
+## [05 &mdash; Functions and Closures](./05-functions-and-closures)
+A tour through all the flavors of functions in Scala.
