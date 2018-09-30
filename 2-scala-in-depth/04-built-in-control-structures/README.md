@@ -538,7 +538,7 @@ The other helper function just calls `mkString`, a Scala method that lets you jo
 
 | Takeaway #3: create small functions that decompose the problem in pieces |
 |--------------------------------------------------------------------------|
-| Creating small functions with clear responsibilities will improve code's readability and maintainability. |
+| Programs should be decomposed into many small functions that each do a well-defined task. |
 
 
 Finally, the `multiTable` method will collect in a sequence of strings the result of calling `makeRow` with a *for expression* whose generator iterates through row numbers 1 to 10. Once we get the sequence, we flatten it by calling `mkString("\n")` which will *join* the sequence elements by the given string delimiter.
