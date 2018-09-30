@@ -16,3 +16,6 @@ Introducing Scala's built-in control structures.
 
 ## [05 &mdash; Functions and Closures](./05-functions-and-closures)
 A tour through all the flavors of functions in Scala.
+
+## [06 &mdash; Control Abstraction](./06-control-abstraction)
+Using *function values* to create new control abstractions
