@@ -56,4 +56,4 @@ oneHalf * 3
 twoThirds / 4
 
 // Note that this does not work
-2 * oneHalf
+//2 * oneHalf
