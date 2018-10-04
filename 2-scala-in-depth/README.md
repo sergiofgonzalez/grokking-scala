@@ -18,4 +18,7 @@ Introducing Scala's built-in control structures.
 A tour through all the flavors of functions in Scala.
 
 ## [06 &mdash; Control Abstraction](./06-control-abstraction)
-Using *function values* to create new control abstractions
+Using *function values* to create new control abstractions.
+
+## [07 &mdash; Composition and Inheritance](./07-composition-and-inheritance)
+Scala's support for object-oriented aspects in depth.
