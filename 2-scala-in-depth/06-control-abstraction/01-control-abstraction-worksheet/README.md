@@ -1,5 +1,5 @@
-# 01 &mdash; Functions and Closures
-> worksheets for practicing functions and closures
+# 01 &mdash; Control Abstraction
+> worksheets for practicing Control Abstraction
 
 To run the project, open it using IntelliJ IDEA and run the corresponding worksheet.
 
