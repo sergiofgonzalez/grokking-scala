@@ -8,7 +8,9 @@
 + Overriding Methods and Fields: Scala's two namespaces
 + Parametric Fields
 + Invoking superclass constructor in the subclass definition
-+ The rules for `override` keyword in Scala
++ The rules for `override` modifier in Scala
++ Polymorphism and Dynamic Binding
++ The `final` keyword
 ---
 
 ## Intro
@@ -257,6 +259,144 @@ Note that the definitions of width and height in `LineElement` carry an `overrid
 
 This *override rules* will make system evolution faster, as you won't be allowed to add new member to a base class if the client code has already introduced such a method.
 
+## Polymorphism and Dynamic Binding
+The fact that a variable of type `Element` could refer to an object of type `ArrayElement` is known as *polymorphism*. Up until now, we've seen two forms for `Element`: `ArrayElement` and `LineElement`, and more new forms can be created by definining more subclasses.
+
+For example, we can also define the following form that has a given width and height and and the element gets filles with a given character:
+
+```scala
+abstract class Element {
+  def contents: Array[String]
+  def height: Int = contents.length
+  def width: Int = if (height == 0) 0 else contents(0).length
+}
+
+class ArrayElement(val contents: Array[String]) extends Element
+
+class LineElement(s: String) extends ArrayElement(Array(s)) {
+  override def width: Int = s.length
+  override def height = 1
+}
+
+class UniformElement(
+                      ch: Char,
+                      override val width: Int,
+                      override val height: Int
+                    ) extends Element {
+  private val line = ch.toString * width
+  def contents = Array.fill(height)(line)
+}
+```
+
+The inheritance hierarchy for the example now looks as follows:
+![Inheritance Hierarchy now](./images/003-inheritance-hierarchy.png)
+
+Thanks to that, Scala will allow all of the following assignments:
+
+```scala
+val e1: Element = new ArrayElement(Array("hello", "world"))
+val ae: ArrayElement = new LineElement("hello")
+val e2: Element = ae
+val e3: Element = new UniformElement('x', 2, 3)
+```
+
+This will also allow for method invocations on variables and expressions to be *dynamically bound*. This means that the actual method implementation invoked will be determined at run-time based on the actual class of the object, not the type of the variable or expression to which it is assigned to.
+
+To demonstrate this, we can add a method named `demo` to our class hierarchy:
+
+```scala
+abstract class Element {
+  def contents: Array[String]
+  def height: Int = contents.length
+  def width: Int = if (height == 0) 0 else contents(0).length
+
+  def demo() = println("Element.demo()")
+}
+
+class ArrayElement(val contents: Array[String]) extends Element {
+  override def demo() = println("ArrayElement.demo()")
+}
+
+class LineElement(s: String) extends ArrayElement(Array(s)) {
+  override def width: Int = s.length
+  override def height = 1
+
+  override def demo() = println("LineElement.demo()")
+}
+
+class UniformElement(
+                      ch: Char,
+                      override val width: Int,
+                      override val height: Int
+                    ) extends Element {
+  private val line = ch.toString * width
+  def contents = Array.fill(height)(line)
+}
+
+def invokeDemo(e: Element) = e.demo()
+```
+
+Note that `demo` has been defined for `Element`, `ArrayElement`, `LineElement` but not for `UniformElement`.
+```scala
+invokeDemo(new ArrayElement(Array("something")))  // -> ArrayElement.demo()
+invokeDemo(new LineElement("something"))          // -> LineElement.demo()
+invokeDemo(new UniformElement(('s'), 5, 2))       // -> Element.demo()
+```
+
+Note how the appropriate method is called even when the type of the argument is `Element`. 
+
+## Declaring Final Members
+Sometimes, when designing an inheritance hierarchy, you want to ensure that a member cannot be overridden by subclasses. You can do that by adding a `final` modifier to the member.
+
+```scala
+class ArrayElement extends Element {
+  final override def demo() = println("ArrayElement.demo()")
+}
+```
+
+When using `final`, any attempt to override this method by any of the subclasses will end up in a compilation error:
+```scala
+class LineElement(s: String) extends ArrayElement(Array(s)) {
+  override def width: Int = s.length
+  override def height = 1
+
+  override def demo() = println("LineElement.demo()") // Err: cannot override final member
+}
+```
+
+The `final` modifier can also be applied to a class that you don't want to be subclassed:
+
+```scala
+final class ArrayElement extends Element {
+}
+class LineElement(s: String) extends ArrayElement(Array(s)) { // Err: illegal inheritance from final class
+}
+```
+
+## Using Composition and Inheritance
+*Composition* and *inheritance* are two ways to define a new class in terms of an existing one. If what you're after is primarily code reuse, you should prefer *composition* to *inheritance*.
+
+*Inheritance* should be used when a *is-a* relationship is found between a superclass and a subclass. Also, it must be clear that your clients will want to use the subclass type as a superclass type to leverage polymorphism and dynamic binding. For example, in our class hierarchy it is clear that:
++ An `ArrayElement` is an `Element`
++ There will be functions receiving `Element` arguments that will want to leverage polymorphism and dynamic binding so that the overriden method of the subclasses get called instead of the `Element` methods when appropriate.
+
+However, these questions will render a suspicious for the `LineElement` class:
++ The `LineElement` is not an `ArrayElement` &mdash; we're inheriting from `LineElement` for convenience and code reuse purposes.
++ It's not clear that we would want to use `LineElement` instances as `ArrayElement`s
+
+Therefore, it really looks like making `LineElement` a subclass of `ArrayElement` is a bad design decision, and we would need to make `LineElement` to inherit from `Element`:
+
+```scala
+class LineElement(s: String) extends Element {
+  val contents = Array(s)
+  override def width = s.length
+  override def height = 1
+}
+```
+
+So that our class hiearchy ends up being:
+![Inheritance Hierarchy](./images/004-inheritance-hierarchy.png)
+
 ---
 ## You know you've mastered this chapter when...
 
@@ -266,7 +406,9 @@ This *override rules* will make system evolution faster, as you won't be allowed
 + You're aware of Scala's fields and methods share the same namespace, which allows you to override a method with a variable and vice versa.
 + You're aware of Scala's parametric fields, which allow you to define fields as class parameters.
 + You're aware that you can invoke a superclass constructor in a subclass definition by place the argument or arguments after the `extends` keyword, as in `extends ArrayElement(Array(s))`.
-+ You understand the rules for `override`in Scala that forces you to use the keyword whenever overriding a concrete method of a superclass (and it's optional for abstract methods).
++ You understand the rules for `override` modifier in Scala that forces you to use the keyword whenever overriding a concrete method of a superclass (and it's optional for abstract methods).
++ You understand the mechanisms of polymorphism and dynamic binding in Scala and you're comfortable writing classes that leverage that mechanism.
++ You're comfortable using the `final` modifier in fields (when you don't want them to be overridden) and in classes (when you don't want them to be subclassed).
 ---
 
 ## Projects
