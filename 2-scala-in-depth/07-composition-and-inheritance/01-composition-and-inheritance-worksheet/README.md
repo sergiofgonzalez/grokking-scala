@@ -12,3 +12,9 @@ Playground for the `override` modifier in Scala.
 
 + [03 &mdash; Polymorphism and Dynamic Binding](./03-polymorphism-and-dynamic-binding.sc)
 Playground for the *polymorphism* and *dynamic binding* concepts in Scala.
+
++ [04 &mdash; Implementing `above`, `beside` and `toString`](./04-above-beside-to-string.sc)
+Playground for the *polymorphism* and *dynamic binding* concepts in Scala.
+
++ [e01 &mdash; Array methods](./e01-array-methods.sc)
+Playground for some new array methods such as `++` and `zip`.

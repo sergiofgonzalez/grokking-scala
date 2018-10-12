@@ -11,6 +11,9 @@
 + The rules for `override` modifier in Scala
 + Polymorphism and Dynamic Binding
 + The `final` keyword
++ Composition and Inheritance
++ Defining a *factory object*
++ Hiding classes within classes
 ---
 
 ## Intro
@@ -397,6 +400,182 @@ class LineElement(s: String) extends Element {
 So that our class hiearchy ends up being:
 ![Inheritance Hierarchy](./images/004-inheritance-hierarchy.png)
 
+
+## Implementing `above`, `beside` and `toString`
+As the next step, we'll implement `above` in the base class `Element`. The method will put the left hand element on top of the right hand one.
+
+The first attempt could look something like
+
+```scala
+abstract class Element {
+...
+  def above(that: Element): Element = new ArrayElement(this.contents ++ that.contents)
+}
+```
+
+Note that the `++` operation concatenates two arrays. 
+
+However, the previous implementation is not robust enough, as it does not let you put elements of different widths on top of each other, but we'll use that implementation for now.
+
+Similar assumptions we'll take for the first implementation of `beside`: it will only work with two elements of the same height:
+
+```scala
+abstract class Element {
+...
+  def beside(that: Element): Element = {
+    val contents = new Array[String](this.contents.length)
+    for (i <- 0 until this.contents.length)
+      contents(i) = this.contents(i) + that.contents(i)
+    new ArrayElement(contents)
+  }
+}
+```
+
+The beside method first allocates a new array `contents` and fills it with the concatenation of the corresponding array elements in `this.contents` and `that.contents`. It finally produces a new `ArrayElement` containing the new contents.
+
+The previous implementation can be written in a more functionally way using *tuples2* and the `zip` method for arrays:
+
+```scala
+  def beside(that: Element): Element = {
+    new ArrayElement(
+      for ((line1, line2) <- this.contents zip that.contents)
+        yield line1 + line2
+    )
+  }
+```
+
+Here, the two arrays this.contents and that.contents are transformed into an array of pairs in which each element of the tuple comes from each of the arrays in sequence:
+
+For example:
+```scala
+Array(1, 2, 3) zip Array('a', 'b') // -> Array((1, 'a'), (2, 'b'))
+```
+
+Note that if one of the two operands is longer than the other, `zip` will drop the remaining elements. Note that the expression `for ((line1, line) <- this.contents zip that.contents)` allows you to name both elements of a pair in one *pattern*. This relies on Scala's pattern matching system.
+Then, inside the loop we just return the concatenation of each of the tuple elements in an array, which is passed to the constructor of the `ArrayElement` class.
+
+The implementation of `toString` will be based on the `mkString` method:
+
+```scala
+override def toString = contents mkString "\n"
+```
+
+In Scala, `array mkString separator` returns a string consisting of all elements of the array concatenated by the given separator. Thus, the implementation of `toString` will return a string in which each of the elements of contents is placed into a separate line.
+
+## Defining a Factory Object
+It's considered a good practice to hide a class hierarchy behind a factory object &mdash; a method that construct other objects. That will allow clients of the hierarchy to use that method to construct objects rather than invoking `new`. The immediate advantage is that object creation is centralized and the details of how objects are represented becomes an implementation detail, making the hierarchy easier to consume.
+
+The first task in constructing a factory is deciding where to create it. In Scala, the most straight-forward solution is to create a companion object of the base class `Element` and make it the factory object for the different layout elements.
+
+Let's follow this scheme (see [02 &mdash; Layout Elements SBT app](./02-layout-elements-app-sbt)):
+```scala
+object Element {
+  def elem(contents: Array[String]): Element = new ArrayElement(contents)
+  def elem(c: Char, width: Int, height: Int): Element = new UniformElement(c, width, height)
+  def elem(line: String): Element = new LineElement(line)
+}
+```
+Remember that the class its companion *singleton object* have to be defined in the same source code file. Also, as a class and its companion object can access each other's private fields, it will make sense to refactor the `Element` class implementation so that it uses the newly defined *factory methods*:
+
+```scala
+import Element.elem
+
+abstract class Element {
+  def contents: Array[String]
+  def height: Int = contents.length
+  def width: Int = if (height == 0) 0 else contents(0).length
+
+  def above(that: Element): Element = elem(this.contents ++ that.contents)
+
+  def beside(that: Element): Element = {
+    elem(
+      for ((line1, line2) <- this.contents zip that.contents)
+        yield line1 + line2
+    )
+  }
+
+  override def toString: String = contents mkString "\n"
+}
+```
+
+The last action in this step will be to make the subclasses `ArrayElement`, `LineElement` and `UniformElement` private, as the clients will no longer need direct access to them.
+
+## Heighten and Widen
+In this section, we will enhance the existing implementation to be able to allow clients to place elements of different widths on top of each other, or elements of different heights beside each other.
+
+This can be solved by adding `widen` and `heighten` helper methods to ensure that the elements placed beside each other and on top of each other have the same width and height. The methods are defined in the `Element` class. 
+
+In addition, as Scala allows you to define classes and singleton objects inside other classes and singleton objects, we will place `ArrayElement`, `LineElement` and `UniformElement` inside the `Element` singleton object and declare them private there. Thus, the classes will still be accessible to the three `elemen()` factory methods but hidden from the clients:
+
+```scala
+object Element {
+
+  private class ArrayElement(val contents: Array[String]) extends Element
+
+  private class LineElement(s: String) extends ArrayElement(Array(s)) {
+    override def width: Int = s.length
+    override def height = 1
+  }
+
+  private class UniformElement(
+                                ch: Char,
+                                override val width: Int,
+                                override val height: Int
+                              ) extends Element {
+    private val line = ch.toString * width
+    def contents: Array[String] = Array.fill(height)(line)
+  }
+
+  def elem(contents: Array[String]): Element = new ArrayElement(contents)
+  def elem(c: Char, width: Int, height: Int): Element = new UniformElement(c, width, height)
+  def elem(line: String): Element = new LineElement(line)
+}
+
+import Element.elem
+
+abstract class Element {
+
+  def contents: Array[String]
+  def height: Int = contents.length
+  def width: Int = if (height == 0) 0 else contents(0).length
+
+  def above(that: Element): Element = {
+    val this1 = this widen that.width   // widen this
+    val that1 = that widen this.width  // widen that
+    elem(this1.contents ++ that1.contents)
+  }
+
+  def beside(that: Element): Element = {
+    val this1 = this heighten that.height
+    val that1 = that heighten this.height
+    elem(
+      for ((line1, line2) <- this1.contents zip that1.contents)
+        yield line1 + line2
+    )
+  }
+
+  def widen(w: Int): Element =
+    if (w <= width) this
+    else {
+      val left = elem(' ', (w - width) / 2, height)
+      val right = elem(' ', w - width - left.width, height)
+      left beside this beside right
+    }
+
+  def heighten(h: Int): Element =
+    if (h <= height) this
+    else {
+      val top = elem(' ', width, (h - height) / 2)
+      val bot = elem(' ', width, h - height - top.height)
+      top above this above bot
+    }
+
+  override def toString: String = contents mkString "\n"
+}
+```
+
+
+
 ---
 ## You know you've mastered this chapter when...
 
@@ -409,9 +588,18 @@ So that our class hiearchy ends up being:
 + You understand the rules for `override` modifier in Scala that forces you to use the keyword whenever overriding a concrete method of a superclass (and it's optional for abstract methods).
 + You understand the mechanisms of polymorphism and dynamic binding in Scala and you're comfortable writing classes that leverage that mechanism.
 + You're comfortable using the `final` modifier in fields (when you don't want them to be overridden) and in classes (when you don't want them to be subclassed).
++ You understand when to use composition vs. inheritance.
++ You know how to define a *factory object* to centralize object creation and thus simplify the usage of a more complicated class.
++ You know that Scala allows you to define classes and singleton objects inside other classes and singleton objects.
 ---
 
 ## Projects
 
-### [01 &mdash; Control Abstraction](./01-composition-and-inheritance-worksheet)
+### [01 &mdash; Composition and Inheritance](./01-composition-and-inheritance-worksheet)
 IntelliJ worksheet project with several worksheet illustrating the concepts of the section.
+
+### [02 &mdash; Layout Elements SBT app](./02-layout-elements-app-sbt)
+SBT project that illustrates the layout elements used to illustrate the class hierarchy used in this section.
+
+### [03 &mdash; Layout Elements SBT app](./03-layout-elements-app-sbt)
+SBT project that illustrates the final implementation for the layout elements used to illustrate the class hierarchy used in this section.

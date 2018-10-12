@@ -463,4 +463,4 @@ IntelliJ worksheet project with several worksheet illustrating the concepts of t
 Simple SBT project that illustrates how to define an application entrypoint in Scala.
 
 ### [03 &mdash; Hello App Trait SBT] (./03-hello-app-trait-sbt)
-Simple SBT project that illustrates how to define an applicaiton entrypoint in Scala by extending the `App` trait.
+Simple SBT project that illustrates how to define an application entrypoint in Scala by extending the `App` trait.
