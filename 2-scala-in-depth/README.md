@@ -22,3 +22,6 @@ Using *function values* to create new control abstractions.
 
 ## [07 &mdash; Composition and Inheritance](./07-composition-and-inheritance)
 Scala's support for object-oriented aspects in depth.
+
+## [08 &mdash; Scala's Hierarchy](./08-scalas-hierarchy)
+Scala's class hierarchy.
