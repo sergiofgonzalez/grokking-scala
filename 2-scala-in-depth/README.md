@@ -25,3 +25,6 @@ Scala's support for object-oriented aspects in depth.
 
 ## [08 &mdash; Scala's Hierarchy](./08-scalas-hierarchy)
 Scala's class hierarchy.
+
+## [09 &mdash; Traits](./09-traits)
+Scala's traits.
