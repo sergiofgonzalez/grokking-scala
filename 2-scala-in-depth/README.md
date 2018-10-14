@@ -27,4 +27,4 @@ Scala's support for object-oriented aspects in depth.
 Scala's class hierarchy.
 
 ## [09 &mdash; Traits](./09-traits)
-Scala's traits.
+Scala's trait concept: fragments that can be combined into more complex concepts through trait mixin
