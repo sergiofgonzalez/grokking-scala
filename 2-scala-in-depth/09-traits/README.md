@@ -413,6 +413,3 @@ This section gives you the guidelines about when to define a *trait* and when to
 
 ### [01 &mdash;Traits](./01-traits-worksheet)
 IntelliJ worksheet project with several worksheet illustrating the concepts of the section.
-
-### [02 &mdash; Tiny Types HTML SBT app](./02-tiny-types-html-app-sbt)
-SBT project that illustrates how conducive Scala is to the creation of tiny types.
