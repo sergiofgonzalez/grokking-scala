@@ -1,0 +1,11 @@
+# .gitignore for Scala snippets and programs
+
+# match only directories (thus the trailing /) and subdirectories (thus no leading /)
+target/
+
+# IntelliJ files (pure sbt profile)
+.idea
+project
+
+# vscode files
+*.code-workspace
