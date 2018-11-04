@@ -6,3 +6,7 @@ To run the project, open it using IntelliJ IDEA and run the corresponding worksh
 ## Worksheets
 + [01 &mdash; Hello, Packages!](./01-hello-packages.sc)
 Illustrates Scala's packages most basic concepts.
+
++ [02 &mdash; Hello, private members!](./02-hello-private.sc)
+Illustrates Scala's private basic concepts.
+

@@ -25,3 +25,4 @@ Scala is a general purpose programming language that integrates features from bo
   + [08 &mdash; Scala's Class Hierarchy](./2-scala-in-depth/08-scalas-hierarchy)
   + [09 &mdash; Traits](./2-scala-in-depth/09-traits)
   + [10 &mdash; Packages and Imports](./2-scala-in-depth/10-packages-and-imports)
+  + [11 &mdash; Assertions and Tests](./2-scala-in-depth/11-assertions-and-tests)

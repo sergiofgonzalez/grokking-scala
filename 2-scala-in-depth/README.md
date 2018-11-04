@@ -31,3 +31,6 @@ Scala's trait concept: fragments that can be combined into more complex concepts
 
 ## [10 &mdash; Packages and Imports](./10-packages-and-imports)
 Packages and Imports in Scala.
+
+## [11 &mdash; Assertions and Tests](./11-assertions-and-tests)
+Checking that Scala code behaves as expected.

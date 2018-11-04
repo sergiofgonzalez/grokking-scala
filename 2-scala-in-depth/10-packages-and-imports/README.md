@@ -6,6 +6,8 @@
 + Packages in Scala: package nesting and access
 + Concise access to code in packages: the `_root_` package
 + Imports in Scala
++ Access Modifiers in Scala: scope of protection
++ The package object
 ---
 
 ## Intro
@@ -419,6 +421,8 @@ Given that definition, any other code in any package can import the methods just
 + You're comfortable using the two available syntax flavors available in Scala to define packages: the Java one and the *C#* one. You understand that packages in Scala can be nested, so that you can end up with a file defining multiple namespaces. You're aware of the existence of the `_root_` package that comes in handy when some local package is shadowing a package in the top-level.
 + You're comfortable writing imports in Scala: you're aware that `_` brings all the elements of a given package into scope so that you don't have to qualify their names when using them. You're aware that you can use `import` clauses anywhere in a Scala file, and not just at the top of the compilation unit. You're also aware that you can even import an argument in a method, so that you don't need to qualify their fields.
 + You're aware of the capabilities of the `import` clause. How you can import several members and packages at once with the *catch-all* syntax, and how to rename members.
++ You're aware of Scala's access modifiers. You're aware of the syntax for the *scope of protection* that allows for a finer-grained control of the visibility, as you can say that something is visible *up to* X, X being the class/package you use in the scope.
++ You're aware of the package object, and that you can use it to place package-wide type aliases and implicit conversions.
 ---
 
 
