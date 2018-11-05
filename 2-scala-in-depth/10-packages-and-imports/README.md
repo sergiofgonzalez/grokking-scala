@@ -431,3 +431,8 @@ Given that definition, any other code in any package can import the methods just
 ### [01 &mdash; Packages and Imports](./01-packages-and-imports-worksheet)
 IntelliJ worksheet project with several worksheet illustrating the concepts of the section.
 
+### [02 &mdash; Hello Imports app!](./02-hello-imports-app-sbt)
+SBT app illustrating imports basic concepts.
+
+### [03 &mdash; Hello Packages app!](./03-hello-packages-app-sbt)
+SBT app illustrating packages basic concepts.
