@@ -34,3 +34,6 @@ Packages and Imports in Scala.
 
 ## [11 &mdash; Assertions and Tests](./11-assertions-and-tests)
 Checking that Scala code behaves as expected.
+
+## [12 &mdash; Case Classes and Pattern Matching](./12-case-classes-and-pattern-matching)
+Pattern matching in Scala.
