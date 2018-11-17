@@ -8,6 +8,8 @@
 + Order of cases in Pattern Matching
 + Sealed Classes
 + The `Optional` type
++ Patterns common use-cases: patterns in variable definitions, case sequences in partial functions and patterns in for expressions
++ A large example with case classes and pattern matching: an arithmetic expression formatter
 ---
 
 ## Intro
@@ -559,6 +561,215 @@ for (Some(fruit) <- results)
   println(fruit)
 ```
 
+## A Larger Example
+The proposed scenario is to write an expression formatter class that displays an arithmetic expression in a two-dimensional layout.
+For example, `x/(x + 1)` should be displayed as:
+```
+  x
+-----
+x + 1
+```
+
+And `((a/(b*c)+1/m)/3)` should be printed as:
+```
+  a     1
+----- + -
+b * c   n
+---------
+    3
+```
+
+For the implementation, we'll use the layout library already developed, along with the `Expr` case classes.
+
+Let's start planning the approach for the horizontal layout.
+The expression:
+```scala
+BinOp("+",
+      BinOp("*",
+            BinOp("+", Var("x"), Var("y")),
+            Var("z")
+      ),
+      Number(1)
+)
+```
+
+should be displayed as: `(x + y) * z + 1`. Note that parentheses would be required around `x + y` but optional around `(x + y) * z`. We'll need to omit parentheses whenever they are redundant.
+
+The precedence can be modeled creating groups in an array of increased precedence, but a more convenient approach is to just define groups of operators of increasing precedence and then calculate the precedence of each operator from that.
+
+The following listing shows the complete code for the expression formatter:
+```scala
+// file: ./expressions/ExprFormatter
+package expressions
+
+sealed abstract class Expr
+
+case class Var(name: String) extends Expr
+case class Number(num: Double) extends Expr
+case class UnOp(operator: String, arg: Expr) extends Expr
+case class BinOp(operator: String, left: Expr, right: Expr) extends Expr
+
+class ExprFormatter {
+  // Operators arrange in groups of increasing precedence
+  private val opGroups =
+    Array(
+      Set("|", "||"),
+      Set("&", "&&"),
+      Set("^"),
+      Set("==", "!="),
+      Set("<", "<=", ">", ">="),
+      Set("+", "-"),
+      Set("*", "%")
+      )
+
+  // A mapping from operators to their precedence
+  private val precedence = {
+    val assocs =
+      for {
+        i <- 0 until opGroups.length
+        op <- opGroups(i)
+      } yield op -> i  // op -> i is called an association (until now, only seen in maps)
+    assocs.toMap
+  }
+
+  private val unaryPrecedence = opGroups.length
+  private val fractionPrecedence = -1
+
+  import elements.Element
+  import Element.elem
+
+  private def format(e: Expr, enclPrec: Int): Element =
+    e match {
+      case Var(name) =>
+        elem(name)
+
+      case Number(num) =>
+        def stripDot(s: String) =
+          if (s endsWith ".0")
+            s.substring(0, s.length - 2)
+          else
+            s
+        elem(stripDot(num.toString))
+
+      case UnOp(op, arg) =>
+        elem(op) beside format(arg, unaryPrecedence)
+
+      case BinOp("/", left, right) =>
+        val top = format(left, fractionPrecedence)
+        val bot = format(right, fractionPrecedence)
+        val line = elem('-', top.width max bot.width, 1)
+        val frac = top above line above bot
+        if (enclPrec != fractionPrecedence)
+          frac
+        else
+          elem(" ") beside frac beside elem(" ")
+
+      case BinOp(op, left, right) =>
+        val opPrec = precedence(op)
+        val l = format(left, opPrec)
+        val r = format(right, opPrec + 1)
+        val oper = l beside elem(" " + op + " ") beside r
+        if (enclPrec <= opPrec) oper
+        else elem("(") beside oper beside elem(")")
+    }
+
+    def format(e: Expr): Element = format(e, 0)
+}
+```
+
+The precedence variable is a map from operators to their precedences, which are integers starting from 0. It is calculated using a *for expression* with two generators. The first generator produces every index `i` of the `opGroups` array. The second generator produces every operator `op` in `opGroups(i)`. For each such operator the *for expression* yields an *association* from the operator `op` to its index `i`.
+
+*Associations* are written with an *infix arrow* (e.g. `op -> i`). So far, we've only seen association as part of map constructions but they're also values in their own right. In fact, `op -> i` is nothing but the pair `(op, i)`.
+
+Now that the precedence of binary operators except `/` has been fixed (the division requires a special treatment because of the vertical layout required for them), it makes sense to generalize this concept to cover unary operators. The precedence of a unary operator is higher than the precedence of every binary operator. Thus, we can set `unaryPrecedence` to the length of the `opGroups` array, which is more than the precedence of the `*` and `%` operators. Division is handled by assigning the special precedence value `-1`.
+
+After these preparations, you are ready to write the main format method. This method takes two arguments: an expression `e` of type `Expr` and the precedence `enclPrec` of the operator directly enclosing the expression `e`. The method yields a layout element that represents a 2D array of characters.
+
+The `stripDot` method is a helper method. The private `format` method does most of the work to format the expressions. The public `format` is the only public method in the library. It takes the expression to format.
+
+The private `format` performs a *pattern match* on the kind of expression. It has five cases.
+
+The first case is:
+
+```scala
+case Var(name) =>
+  elem(name)
+```
+
+If the expression is a variable, the result is an element formed from the variable's name.
+
+The second case is:
+
+```scala
+case Number(num) =>
+  def stripDot(s: String) =
+    if (s endsWith ".0") s.substring(0, s.length - 2)
+    else s
+  elem(stripDot(num.toString))
+```
+
+If the expression is a number, the result is an element formed from the number's value. The `stripDot` function removes any `".0"` suffix from the resulting string.
+
+The third case is:
+
+```scala
+case UnOp(op, arg) =>
+  elem(op) beside format(arg, unaryPrecedence)
+```
+
+If the expression is a unary operation `UnOp(op, arg)`, the result is formed from the operation `op` and the result of formatting the argument `arg` with the highest possible environment precedence. This means that if arg is a binary operation (but not a fraction) it will always be displayed in parentheses.
+
+The fourth case is:
+
+```scala
+case BinOp("/", left, right) =>
+  val top = format(left, fractionPrecedence)
+  val bot = format(right, fractionPrecedence)
+  val line = elem('-', top.width max bot.width, 1)
+  val frac = top above line above bot
+  if (enclPrec != fractionPrecedence) frac
+  else elem(" ") beside frac beside elem(" ")
+```
+
+If the expression is a fraction, an intermediate result frac is formed by placing the formatted operands left and right on top of each other, separated by an horizontal line element. The width of the horizontal line is the maximum of the widths of the formatted operands. This intermediate result is also the final result unless the fraction appears itself as an argument of another fraction. In the latter case, a space is added on each side of the `frac`. This is because otherwise, the expression `(a/b)/c` would be displayed as:
+```
+a
+-
+b
+-
+c
+```
+which does not clarify where the top-levl fractional bar is. However, with the correction, it will be displayed as:
+```
+ a
+ -
+ b
+---
+ c
+```
+
+The fifth and last case is:
+
+```scala
+case BinOp(op, left, right) =>
+  val opPrec = precedence(op)
+  val l = format(left, opPrec)
+  val r = format(right, opPrec + 1)
+  val oper = l beside elem(" " + op + " ") beside r
+  if (enclPrec <= opPrec) oper
+  else elem("(") beside oper beside elem(")")
+```
+
+This case will be applied for all other binary operations. As we know there's no division in place, to format it we just format the left and right operands. The precedence parameter for formatting the left operand is the precedence opPrec of the operator `op`, while for the right operand it is one more than that. This scheme ensures that parentheses also reflect the correct associativity.
+For example, the operation:
+```scala
+BinOp("-", Var("a"), BinOp("-", Var("b"), Var("c")))
+```
+would be parenthesized as `"a - (b - c)"`. The intermediate result oper is then formed by placing the formatted left and right operands side-by-side, separated by the operator. If the precedence of the current operator is smaller than the precedenve of the enclosing operator, `oper` is placed between parentheses; otherwise it is returned as is.
+
+
+You ca see a running example in [02 &mdash; Expression Formatter](./02-expression-formatter-app-sbt)
+
 ---
 ## You know you've mastered this chapter when...
 
@@ -571,6 +782,8 @@ for (Some(fruit) <- results)
 + You know that the order for the cases while doing *pattern matching* is important, because the rules are tried from top to bottom.
 + You understand *sealed classes* and when those become useful when doing pattern matching (to prevent worrying about unknown subclasses).
 + You're comfortable using Scala's `Option` type to model optional values.
++ You recognize the different scenarios in which pattern matching is useful: destructuring in variable definition, partial functions and *for expressions*.
++ You understand partial function mechanisms, and are comfortable using `isDefinedAt` to check if a partial function can be safely called.
 ---
 
 
@@ -579,18 +792,6 @@ for (Some(fruit) <- results)
 ### [01 &mdash; Case classes and Pattern Matching](./01-case-classes-and-pattern-matching-worksheet)
 IntelliJ worksheet project with several worksheet illustrating the concepts of the section.
 
-### [02 &mdash; Testing Layout Elements with ScalaTest](./02-testing-layout-elements-scalatest-app-sbt)
-SBT app illustrating *ScalaTest* framework concepts.
-
-### [03 &mdash; Exploring ScalaTest Failure Reports](./03-scalatest-failure-reports-app-sbt)
-SBT app illustrating *ScalaTest* failure reports functionality.
-
-### [04 &mdash; Exploring ScalaTest BDD tests](./04-bdd-scalatest-app-sbt)
-SBT app illustrating *ScalaTest* BDD approach and the matchers DSL.
-
-### [05 &mdash; BDD with Specs2](./05-bdd-specs2-app-sbt)
-SBT app illustrating *Specs2* BDD approach and the *acceptance* and *unit* specs.
-
-### [06 &mdash; BDD with Specs2](./06-scalacheck-app-sbt)
-SBT app illustrating *ScalaCheck* property-based testing.
+### [02 &mdash; Expression Formatter](./02-expression-formatter-app-sbt)
+SBT app illustrating case-classes concepts in a larger example.
 

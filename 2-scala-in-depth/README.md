@@ -36,4 +36,7 @@ Packages and Imports in Scala.
 Checking that Scala code behaves as expected.
 
 ## [12 &mdash; Case Classes and Pattern Matching](./12-case-classes-and-pattern-matching)
-Pattern matching in Scala.
+Scala's pattern matching mechanisms in detail.
+
+## [13 &mdash; Working with Lists](./13-working-with-lists)
+Scala's pattern matching mechanisms in detail.
